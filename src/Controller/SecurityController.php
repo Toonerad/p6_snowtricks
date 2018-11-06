@@ -33,6 +33,9 @@ class SecurityController extends AbstractController
             $user->setPassword($hash);
             $manager->persist($user);
             $manager->flush();
+
+
+            return $this->redirectToRoute("security_login");
         }
 
         return $this->render('security/register.html.twig', [
@@ -40,6 +43,10 @@ class SecurityController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route(path="/login", name="security_login")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function login()
     {
         return $this->render('security/login.html.twig');
