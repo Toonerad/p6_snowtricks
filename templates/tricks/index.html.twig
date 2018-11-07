@@ -2,6 +2,53 @@
 
 {% block title %}Toutes les figures | SnowTricks{% endblock %}
 
-{% block body %}
+{% block navbar %}navbar-light{% endblock %}
 
+{% block body %}
+    <section class="slice slice-xl">
+        <div class="container">
+            <div class="row justify-content-center" style="margin-bottom: 20px">
+                <div class="col-lg-7">
+                    <div class="text-center pt-lg-md">
+                        <h2 class="heading h1 mb-4">
+                           Toutes les figures
+                        </h2>
+                        <p class="lead lh-180">
+                            We are a professional digital agency providing premium themes, UI/UX design and web apps that you will simply love.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+
+                {% for trick in tricks %}
+                <div class="col-lg-3" style="margin-bottom: 30px">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="https://place-hold.it/270x200" class="img-fluid">
+                        </div>
+                        <div class="card-body">
+                            <div class="row mb-1">
+                                <div class="col">
+                                    <h5 class="heading h5 mb-3">{{ trick.name }}</h5>
+                                </div>
+                            </div>
+                            <p class="card-text">{{ trick.description }}</p>
+                            {% if app.user %}
+                            <div class="col">
+                                <div class="card-icon-actions card-icon-actions-lg text-right">
+                                    <a href="#"><i class="fas fa-pencil-alt"></i></a>
+                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+        </div>
+    </section>
 {% endblock %}

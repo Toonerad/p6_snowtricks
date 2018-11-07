@@ -32,28 +32,35 @@
                 <li class="nav-item ">
                     <a class="nav-link" href="{{ path('homepage') }}">Accueil</a>
                 </li>
-               <!-- <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbar_main_dropdown_1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Déroulant</a>
-                    <div class="dropdown-menu" aria-labelledby="navbar_1_dropdown_1">
-                        <a class="dropdown-item" href="#">Homepage</a>
-                        <a class="dropdown-item" href="#">About us</a>
-                        <a class="dropdown-item" href="#">Sign in</a>
-                        <a class="dropdown-item" href="#">Contact</a>
-                    </div>
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{ path('tricks') }}">Figures</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../docs/introduction.html">Menu</a>
-                </li>-->
+                <!-- <li class="nav-item dropdown">
+                     <a class="nav-link dropdown-toggle" href="#" id="navbar_main_dropdown_1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Déroulant</a>
+                     <div class="dropdown-menu" aria-labelledby="navbar_1_dropdown_1">
+                         <a class="dropdown-item" href="#">Homepage</a>
+                         <a class="dropdown-item" href="#">About us</a>
+                         <a class="dropdown-item" href="#">Sign in</a>
+                         <a class="dropdown-item" href="#">Contact</a>
+                     </div>
+                 </li>
+                 <li class="nav-item">
+                     <a class="nav-link" href="../docs/introduction.html">Menu</a>
+                 </li>-->
                 {% if not app.user %}
-                <li class="nav-item">
-                    <a href="{{ path('security_login') }}" class="nav-link d-lg-none">Se connecter</a>
-                    <a href="{{ path('security_login') }}" class="btn btn-sm bg-light d-none d-lg-inline-flex">Se connecter</a>
-                </li>
+                    <li class="nav-item">
+                        <a href="{{ path('security_registration') }}" class="nav-link d-lg-none">S'inscrire</a>
+                        <a href="{{ path('security_registration') }}" class="btn btn-sm bg-light d-none d-lg-inline-flex">S'inscrire</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ path('security_login') }}" class="nav-link d-lg-none">Se connecter</a>
+                        <a href="{{ path('security_login') }}" class="btn btn-sm bg-light d-none d-lg-inline-flex">Se connecter</a>
+                    </li>
                 {% else %}
-                <li class="nav-item">
-                    <a href="{{ path('security_logout') }}" class="nav-link d-lg-none">Déconnexion</a>
-                    <a href="{{ path('security_logout') }}" class="btn btn-sm bg-dark d-none d-lg-inline-flex">Déconnexion</a>
-                </li>
+                    <li class="nav-item">
+                        <a href="{{ path('security_logout') }}" class="nav-link d-lg-none">Déconnexion</a>
+                        <a href="{{ path('security_logout') }}" class="btn btn-sm bg-dark d-none d-lg-inline-flex">Déconnexion</a>
+                    </li>
                 {% endif %}
                 <div class="dropdown-divider d-lg-none my-4"></div>
             </ul>
