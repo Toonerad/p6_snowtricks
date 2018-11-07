@@ -10,7 +10,7 @@ class TricksAddController extends AbstractController
     /**
      * @Route("/tricks/add", name="tricks_add")
      */
-    public function index()
+    public function create()
     {
         return $this->render('tricks/tricks_add.html.twig');
     }
