@@ -51,6 +51,21 @@ class User implements UserInterface
      */
     private $confirm_password;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $token;
+
+    /**
+     * @ORM\Column(type="string", length=5)
+     */
+    private $code;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isActivated;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -107,6 +122,55 @@ class User implements UserInterface
     {
         $this->confirm_password = $confirm_password;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getToken()
+    {
+        return $this->token;
+    }
+
+    /**
+     * @param mixed $token
+     */
+    public function setToken($token): void
+    {
+        $this->token = $token;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * @param mixed $code
+     */
+    public function setCode($code): void
+    {
+        $this->code = $code;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIsActivated()
+    {
+        return $this->isActivated;
+    }
+
+    /**
+     * @param mixed $isActivated
+     */
+    public function setIsActivated($isActivated): void
+    {
+        $this->isActivated = $isActivated;
+    }
+
 
     public function getRoles() {
         return ['ROLE_USER'];

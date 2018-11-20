@@ -14,7 +14,7 @@
                            Toutes les figures
                         </h2>
                         <p class="lead lh-180">
-                            We are a professional digital agency providing premium themes, UI/UX design and web apps that you will simply love.
+                            Toutes les figures sont présentés sur cette page. Cliquez sur une figure pour voir sa description ainsi que d'autre images ou vidéos.
                         </p>
                     </div>
                 </div>
@@ -31,10 +31,10 @@
                         <div class="card-body">
                             <div class="row mb-1">
                                 <div class="col">
-                                    <h5 class="heading h5 mb-3">{{ trick.name }}</h5>
+                                    <a href="{{ path('tricks_show', {'id': trick.id}) }}"><h5 class="heading h5 mb-3">{{ trick.name }}</h5></a>
                                 </div>
                             </div>
-                            <p class="card-text">{{ trick.description }}</p>
+                            <p class="card-text">{{ trick.description|slice(0,20) }}...</p>
                             {% if app.user %}
                             <div class="col">
                                 <div class="card-icon-actions card-icon-actions-lg text-right">

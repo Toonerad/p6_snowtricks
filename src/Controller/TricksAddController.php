@@ -9,6 +9,8 @@ class TricksAddController extends AbstractController
 {
     /**
      * @Route("/tricks/add", name="tricks_add")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function create()
     {
