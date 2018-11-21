@@ -23,5 +23,87 @@
     </section>
 
 
+    <section id="figures" class="slice slice-lg" data-delimiter="1">
+        <div class="container">
+            <div class="mb-md text-center">
+                <h3 class="heading h3">Nouvelles figures</h3>
+                <div class="fluid-paragraph text-center mt-4">
+                    <p class="lead lh-180">Dernières figures ajoutés sur le site par des utilisateurs.{% if not app.user %} Merci de vous inscrire/connecter afin de l'éditer ou la suprimmer.{% endif %}</p>
+                </div>
+            </div>
+
+            <div class="row">
+
+                {% for trick in tricks %}
+                    <div class="col-lg-3" style="margin-bottom: 30px">
+                        <div class="card">
+                            <div class="card-image">
+                                <a href="{{ path('tricks_show', {'id': trick.id}) }}" > <img src="https://place-hold.it/270x200" class="img-fluid"></a>
+                            </div>
+                            <div class="card-body">
+                                <div class="row mb-1">
+                                    <div class="col">
+                                        <a href="{{ path('tricks_show', {'id': trick.id}) }}"><h5 class="heading h5 mb-3">{{ trick.name }}</h5></a>
+                                    </div>
+                                </div>
+                                <p class="card-text">{{ trick.description|slice(0,20) }}...</p>
+                                {% if app.user %}
+                                    <div class="col">
+                                        <div class="card-icon-actions card-icon-actions-lg text-right">
+                                            <a href="#"><i class="fas fa-pencil-alt"></i></a>
+                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="px-4">
+                <div class="row justify-content-center cols-xs-space cols-sm-space cols-md-space">
+                    <div class="col-lg-7">
+                        <div class="text-center">
+                            <div class="btn-container mt-5">
+                                <a href="{{ path('tricks') }}" class="btn btn-primary">
+                                    Voir toutes les figures
+                                </a>
+                               {% if app.user %}
+                                   <a href="{{ path('tricks_add') }}" class="btn btn-link">Ajouter une figure</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="slice sct-color-1">
+        <div class="container">
+            <div class="row cols-xs-space cols-sm-space align-items-center">
+                <div class="col-md-6">
+                    <img src="{{ asset('img/snowboard.jpg') }}" class="img-center img-fluid rounded z-depth-3">
+                </div>
+                <div class="col-md-6 col-lg-5 ml-lg-auto">
+                    <div class="pr-md-4">
+                        <h3 class="heading heading-3 strong-500">
+                            Envie de changer de snowboard ?
+                        </h3>
+                        <p class="lead text-gray mt-4"> Vous avez envie de changer de snowboard mais vous n'avez pas beaucoup de budget. Notre partenaire est fait pour vous !
+                        </p>
+
+                        <button type="button" class="btn btn-block btn-primary">Allez sur le site</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
 
 {% endblock %}

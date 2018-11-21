@@ -31,6 +31,8 @@ class SecurityController extends AbstractController
         if($form->isSubmitted() && $form->isValid()) {
             $hash = $encoder->encodePassword($user, $user->getPassword());
             $user->setPassword($hash);
+            $user->setIsActivated(false);
+            //$token = bin2hex(random_bytes(78));
             $manager->persist($user);
             $manager->flush();
 

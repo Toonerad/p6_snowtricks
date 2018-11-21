@@ -66,6 +66,8 @@ class User implements UserInterface
      */
     private $isActivated;
 
+    private $roles = [];
+
     public function getId(): ?int
     {
         return $this->id;
@@ -171,9 +173,12 @@ class User implements UserInterface
         $this->isActivated = $isActivated;
     }
 
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        $roles[] = 'ROLE_USER';
 
-    public function getRoles() {
-        return ['ROLE_USER'];
+        return array_unique($roles);
     }
 
     public function getSalt() {}
