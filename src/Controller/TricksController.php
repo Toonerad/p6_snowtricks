@@ -8,16 +8,15 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment;
 
-class HomeController extends AbstractController
+class TricksController
 {
-
     /**
      * @var Environment
      */
     private $twig;
 
     /**
-     * HomeController constructor.
+     * TricksController constructor.
      * @param Environment $twig
      */
     public function __construct(Environment $twig)
@@ -27,7 +26,7 @@ class HomeController extends AbstractController
 
 
     /**
-     * @Route("/", name="homepage")
+     * @Route("/tricks", name="tricks")
      *
      * @param TrickRepository $repo
      * @return Response
@@ -38,11 +37,10 @@ class HomeController extends AbstractController
     public function index(TrickRepository $repo)
     {
 
-        $tricks = $repo->findBy(array(), array('id' => 'DESC'),4);
+        $tricks = $repo->findBy(array(), array('id' => 'DESC'));
 
-        return new Response($this->twig->render('home/index.html.twig', [
+        return new Response($this->twig->render('tricks/index.html.twig', [
             'tricks' => $tricks,
         ]));
-
     }
 }

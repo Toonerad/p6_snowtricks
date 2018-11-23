@@ -6,11 +6,6 @@
 
 {% block body %}
 
-
-
-
-
-
     <section class="py-xl bg-cover bg-size--cover" style="background-image: url('{{ asset('img/register_background.jpg') }}');background-position: center;background-attachment: fixed;background-repeat: no-repeat;" >
         <span class="mask bg-primary alpha-6"></span>
         <div class="container d-flex align-items-center no-padding">
@@ -45,7 +40,7 @@
                                     </div>
 
                                     <div class="custom-control custom-checkbox mb-3">
-                                        <input type="checkbox" class="custom-control-input" id="remember_me" name="_remember_me">
+                                        <input type="checkbox" class="custom-control-input" id="remember_me" name="_remember_me" checked>
                                         <label class="custom-control-label" for="remember_me">Se souvenir de moi</label>
                                     </div>
 
@@ -57,9 +52,7 @@
                 </div>
             </div>
         </div>
-
     </section>
-
 
 
 {% endblock body %}
