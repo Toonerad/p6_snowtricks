@@ -60,6 +60,10 @@
                     </li>
                 {% else %}
                     <li class="nav-item">
+                        <a href="{{ path('tricks_add') }}" class="nav-link d-lg-none">Ajouter une figure</a>
+                        <a href="{{ path('tricks_add') }}" class="btn btn-sm bg-info d-none d-lg-inline-flex">Ajouter une figure</a>
+                    </li>
+                    <li class="nav-item">
                         <a href="{{ path('security_logout') }}" class="nav-link d-lg-none">Déconnexion</a>
                         <a href="{{ path('security_logout') }}" class="btn btn-sm bg-dark d-none d-lg-inline-flex">Déconnexion</a>
                     </li>
