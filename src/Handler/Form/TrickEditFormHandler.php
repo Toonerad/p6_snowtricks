@@ -2,19 +2,17 @@
 /**
  * Created by PhpStorm.
  * User: lucas
- * Date: 22/11/2018
- * Time: 22:00
+ * Date: 23/11/2018
+ * Time: 19:14
  */
 
 namespace App\Handler\Form;
 
-
 use App\Repository\TrickRepository;
 use Symfony\Component\Form\FormInterface;
 
-class TrickAddFormHandler
+class TrickEditFormHandler
 {
-
     /**
      * @var TrickRepository
      */
@@ -41,5 +39,4 @@ class TrickAddFormHandler
         }
         return false;
     }
-
 }
