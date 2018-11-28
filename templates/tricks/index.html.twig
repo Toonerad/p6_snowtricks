@@ -14,41 +14,91 @@
                            Toutes les figures
                         </h2>
                         <p class="lead lh-180">
-                            Toutes les figures sont présentés sur cette page. Cliquez sur une figure pour voir sa description ainsi que d'autre images ou vidéos.
+                            Toutes les figures sont présentées sur cette page. Cliquez sur une figure pour voir sa description ainsi que d'autres images ou vidéos.
                         </p>
                     </div>
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row" id="tricks" data-offset="0" data-limit="8">
 
-                {% for trick in tricks %}
-                <div class="col-lg-3" style="margin-bottom: 30px">
-                    <div class="card">
-                        <div class="card-image">
-                           <a href="{{ path('tricks_show', {'id': trick.id}) }}" > <img src="https://place-hold.it/270x200" class="img-fluid"></a>
-                        </div>
-                        <div class="card-body">
-                            <div class="row mb-1">
-                                <div class="col">
-                                    <a href="{{ path('tricks_show', {'id': trick.id}) }}"><h5 class="heading h5 mb-3">{{ trick.name }}</h5></a>
-                                </div>
-                            </div>
-                            <p class="card-text">{{ trick.description|slice(0,20) }}...</p>
-                            {% if app.user %}
-                            <div class="col">
-                                <div class="card-icon-actions card-icon-actions-lg text-right">
-                                    <a href="{{ path('tricks_edit', {'id': trick.id}) }}"><i class="fas fa-pencil-alt"></i></a>
-                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                </div>
-                            </div>
-                            {% endif %}
-                        </div>
-                    </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-3">
+                    <button id="more" type="button" class="btn btn-block btn-outline-dark">Voir plus</button>
                 </div>
-                {% endfor %}
             </div>
 
         </div>
     </section>
 {% endblock %}
+
+{% block javascripts %}
+    <script>
+        $( document ).ready(function () {
+
+            var offset = $('#tricks').data('offset');
+            var limit = $('#tricks').data('limit');
+            var total = 0;
+
+            function request(offset, limit)
+            {
+                $.ajax({
+                    url: "{{ path('ajax') }}",
+                    method: "POST",
+                    data: {
+                        'offset': offset,
+                        'limit': limit,
+                    },
+                    success: function (result) {
+                        total = result.length;
+                        if (total < limit ) {
+                            $('#more').hide();
+                        }
+
+                        for(var i=0; i < result.length; i++)
+                        {
+                            var id = result[i]['id'];
+                            var minidesc = result[i]['description'].substring(0, 50);
+                            var html =
+                                "<div class=\"col-lg-3\" style=\"margin-bottom: 30px\">\n" +
+                                "                    <div class=\"card\">\n" +
+                                "                        <div class=\"card-image\">\n" +
+                                "                           <a href=\"/tricks/"+ id +" \" > <img src=\"https://place-hold.it/270x200\" class=\"img-fluid\"></a>\n" +
+                                "                        </div>\n" +
+                                "                        <div class=\"card-body\">\n" +
+                                "                            <div class=\"row mb-1\">\n" +
+                                "                                <div class=\"col\">\n" +
+                                "                                    <a href=\"/tricks /"+ id +" \"><h5 class=\"heading heading-5 strong-600\">" + result[i]['name'] +  "</h5></a>  " +
+                                "                                </div>\n" +
+                                "                            </div>\n" +
+                                "                            <p class=\"card-text\"> " + minidesc + "...</p>" +
+                                "                            {% if app.user %}\n" +
+                                "                            <div class=\"col\">\n" +
+                                "                                <div class=\"card-icon-actions card-icon-actions-lg text-right\">\n" +
+                                "                                    <a href=\"/tricks/" + id + "/edit  \"><i class=\"fas fa-pencil-alt\"></i></a>\n" +
+                                "                                    <a href=\"#\"><i class=\"fas fa-trash-alt\"></i></a>\n" +
+                                "                                </div>\n" +
+                                "                            </div>\n" +
+                                "                            {% endif %}\n" +
+                                "                        </div>\n" +
+                                "                    </div>\n" +
+                                "                </div>";
+
+
+                            $('#tricks').append(html);
+                        }
+                    }
+                });
+            }
+
+            request(offset, limit);
+            offset = $('#tricks').data("offset") + limit;
+
+            $('#more').on('click', function () {
+                request(offset, limit);
+                offset += $('#tricks').data("offset") + limit;
+            })
+        })
+    </script>
+{%  endblock %}
