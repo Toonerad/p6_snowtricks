@@ -47,6 +47,7 @@
                  <li class="nav-item">
                      <a class="nav-link" href="../docs/introduction.html">Menu</a>
                  </li>-->
+
                 {% if not app.user %}
                     <li class="nav-item">
                         <a href="{{ path('security_registration') }}" class="nav-link d-lg-none">S'inscrire</a>
@@ -63,8 +64,7 @@
                         <a class="nav-link" href="{{ path('tricks_add') }}">Ajouter une figure</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ path('security_logout') }}" class="nav-link d-lg-none">Déconnexion</a>
-                        <a href="{{ path('security_logout') }}" class="btn btn-sm bg-dark d-none d-lg-inline-flex">Déconnexion</a>
+                        <a href="" class="btn btn-sm bg-dark d-none d-lg-inline-flex" data-toggle="modal" data-target="#modal_5">Déconnexion</a>
                     </li>
                 {% endif %}
                 <div class="dropdown-divider d-lg-none my-4"></div>
@@ -78,6 +78,31 @@
 <main class="main">
     {% block body %}{% endblock %}
 </main>
+
+<div class="modal modal-danger fade" id="modal_5" tabindex="-1" role="dialog" aria-labelledby="modal_5" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal_title_6">Zone dangeureuse</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="fas fa-times-circle"></i></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="py-3 text-center">
+                    <i class="fas fa-exclamation-circle fa-4x"></i>
+                    <h4 class="heading mt-4">Se déconnecter</h4>
+                    <p>
+                        Voulez-vous vraiment vous déconnecter ?
+                    </p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="{{ path('security_logout') }}" class="btn btn-sm bg-light d-none d-lg-inline-flex">Déconnexion</a>
+            </div>
+        </div>
+    </div>
+</div>
 
 <footer class="pt-5 pb-3 footer  footer-dark bg-tertiary">
     <div class="container">

@@ -39,7 +39,6 @@ class TricksShowController extends AbstractController
 
         //A changer
         return $this->render('tricks/tricks_show.html.twig', [
-            'controller_name' => 'TricksShowController',
             'trick' => $trick
         ]);
     }

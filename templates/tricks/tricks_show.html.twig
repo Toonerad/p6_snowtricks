@@ -1,32 +1,65 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Toutes les figures | SnowTricks{% endblock %}
+{% block title %}{{ trick.name }} | SnowTricks{% endblock %}
 
-{% block navbar %}navbar-light{% endblock %}
+{% block navbar %}navbar-dark{% endblock %}
+
+{% block stylesheets %}
+
+    <style>
+        body {
+            background-image: url({{ asset('img/trick_background.jpg') }});
+        }
+
+        #test {
+            background-color: white;
+            border: 0 solid white;
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 5px 10px 18px #3f3f3f;
+            margin-top: 5em;
+            position: relative;
+        }
+
+    </style>
+
+{% endblock %}
 
 {% block body %}
+    <section class="slice slice-xl spotlight parallax bg-cover bg-size--cover" data-spotlight="fullscreen" >
+        <span class="mask bg-tertiary alpha-7"></span>
+        <div class="container" id="test">
 
+            {% if app.user %}
+               <div class="col">
+                   <div class="card-icon-actions card-icon-actions-lg text-right">
+                       <a href="{{ path('tricks_edit', {'id': trick.id}) }}"><i class="fas fa-pencil-alt"></i></a>
+                       <a href="#"><i class="fas fa-trash-alt"></i></a>
+                   </div>
+               </div>
+            {% endif %}
 
-    <section class="spotlight parallax bg-cover bg-size--cover" data-spotlight="fullscreen" style="background-image: url('assets/images/backgrounds/img-1.jpg')">
-        <span class="mask bg-primary alpha-7"></span>
-        <div class="spotlight-holder py-lg pt-lg-xl" style="height: 758px;">
-            <div class="container d-flex align-items-center no-padding">
-                <div class="col">
-                    <div class="row cols-xs-space align-items-center text-center text-md-left justify-content-center">
-                        <div class="col-7">
-                            <div class="text-center mt-5">
-                                <img src="assets/images/brand/icon.png" style="width: 200px;" class="img-fluid animated" data-animation-in="jackInTheBox" data-animation-delay="1000">
-                                <h2 class="heading display-4 font-weight-400 text-white mt-5 animated" data-animation-in="fadeInUp" data-animation-delay="2000">
-                                    <span class="font-weight-700">Boomerang</span> UI Kit
-                                </h2>
-                                <p class="lead text-white mt-3 lh-180 c-white animated" data-animation-in="fadeInUp" data-animation-delay="2500">
-                                    Free HTML UI Kit based on the well known Bootstrap 4 Framework brought to you by <strong class="text-white">Webpixels</strong>
-                                </p>
-                            </div>
-                        </div>
+            <div class="row justify-content-center" style="margin-bottom: 20px">
+                <div class="col-lg-7">
+                    <div class="text-center pt-lg-md">
+                        <h2 class="heading h1 mb-4">
+                            {{ trick.name }}
+                        </h2>
+                        <p class="lead lh-180">
+                            <span class="badge badge-lg badge-pill badge-tertiary">Catégorie: {{ trick.category }}</span>
+                            <span class="badge badge-lg badge-pill badge-secondary"><i>Modifié le {{ trick.createdAt|date("d/m/Y à H:i") }}</i></span>
+                        </p>
                     </div>
                 </div>
             </div>
+
+            <h2 style="margin-left: 20px ">Description:</h2>
+            <div class="row font-weight-600 text-dark" style="margin-left: 10px; margin-right: 10px">
+               {{ trick.description }}
+            </div>
+
+
+
         </div>
     </section>
 
