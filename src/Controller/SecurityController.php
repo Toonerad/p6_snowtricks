@@ -15,10 +15,12 @@ class SecurityController extends AbstractController
 
     /**
      * @Route(path="/register", name="security_registration")
+     *
      * @param Request $request
      * @param ObjectManager $manager
      * @param UserPasswordEncoderInterface $encoder
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
      */
     public function registration(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder)
     {
@@ -32,7 +34,10 @@ class SecurityController extends AbstractController
             $hash = $encoder->encodePassword($user, $user->getPassword());
             $user->setPassword($hash);
             $user->setIsActivated(false);
-            //$token = bin2hex(random_bytes(78));
+            $token = bin2hex(random_bytes(78));
+            $code = strtoupper(bin2hex(random_bytes(3))) ;
+            $user->setToken($token);
+            $user->setCode($code);
             $manager->persist($user);
             $manager->flush();
 
@@ -47,6 +52,8 @@ class SecurityController extends AbstractController
 
     /**
      * @Route(path="/login", name="security_login")
+     *
+     * @param User $user
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function login()
