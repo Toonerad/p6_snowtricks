@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block navbar %}navbar-light{% endblock %}
+
+{% block title %}Vérification | Snowtricks{% endblock %}
+
+{% block body %}
+
+
+    <section class="slice slice-xl">
+        <div class="container">
+            <div class="row justify-content-center" style="margin-bottom: 20px">
+                <div class="col-lg-7">
+                    <div class="text-center pt-lg-md">
+                        <h2 class="heading h1 mb-4">
+                            Code d'activation
+                        </h2>
+                        <p class="lead lh-180">
+                            Merci de soummettre le code qui est dans l'email envoyé.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+                {{ form_start(formActivation) }}
+
+                {{ form_row(formActivation.code, {'label': 'Code de validation' ,'attr': {'placeholder': 'ex: Z4SQ35'}})}}
+
+                <button type="submit" class="btn btn-block btn-lg bg-gradient-cyan mt-4">Valider</button>
+                {{ form_end(formActivation) }}
+
+        </div>
+    </section>
+
+{% endblock %}

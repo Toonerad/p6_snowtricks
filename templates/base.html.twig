@@ -60,12 +60,17 @@
                         <a href="{{ path('security_login') }}" class="btn btn-sm bg-light d-none d-lg-inline-flex">Se connecter</a>
                     </li>
                 {% else %}
-                    <li class="nav-item ">
-                        <a class="nav-link" href="{{ path('tricks_add') }}">Ajouter une figure</a>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="" id="navbar_main_dropdown_1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mon compte  </a>
+                        <div class="dropdown-menu" aria-labelledby="navbar_1_dropdown_1">
+                            <span class="dropdown-item">Pseudo: {{ app.user.username }}</span>
+                            <a class="dropdown-item" href="{{ path('tricks_add') }}">Ajouter une figure</a>
+                            <a class="dropdown-item" data-toggle="modal" data-target="#modal_5" href="">Déconnexion</a>
+
+                        </div>
                     </li>
-                    <li class="nav-item">
-                        <a href="" class="btn btn-sm bg-dark d-none d-lg-inline-flex" data-toggle="modal" data-target="#modal_5">Déconnexion</a>
-                    </li>
+
                 {% endif %}
                 <div class="dropdown-divider d-lg-none my-4"></div>
             </ul>
