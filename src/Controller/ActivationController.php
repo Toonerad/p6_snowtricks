@@ -65,12 +65,20 @@ class ActivationController
     {
         $token = $request->attributes->get('token');
         $user = $this->userRepo->findOneBy(['token' => $token]);
+        if(!$user){
+            return new RedirectResponse($this->urlGenerator->generate('homepage'));
+        }
         $codeUser = $user->getCode();
 
         $form = $this->formFactory->create(ActivationType::class, ['codeUser' => $codeUser], ['csrf_field_name' => $codeUser])->handleRequest($request);
 
 
         if($formHandler->handle($form)) {
+
+            /*
+             * Faire l'envoie d'email ici
+             */
+
             return new RedirectResponse($this->urlGenerator->generate('success', ['token' => $token]));
         }
 

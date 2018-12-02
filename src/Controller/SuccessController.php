@@ -53,7 +53,7 @@ class SuccessController
     {
         $previousUrl = $request->headers->get('referer');
         $token = $request->attributes->get('token');
-        
+
 
         if (strpos($previousUrl, $token) === false) {
             return new RedirectResponse($this->urlGenerator->generate('homepage'));

@@ -20,7 +20,7 @@ class ActivationType extends AbstractType
                     'constraints' => array(
                         new NotBlank(['message' => "Merci de soumettre le code envoyé par email"]),
                         new Length(['max' => 6,
-                            'maxMessage' => "Le code doit faire minimum 6 caractères",
+                            'maxMessage' => "Le code doit faire 6 caractères",
                             ]),
                         new EqualTo([
                             "value" => $options['csrf_field_name'],
