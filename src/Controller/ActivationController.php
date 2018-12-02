@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Form\ActivationType;
 use App\Handler\Form\ActivationFormHandler;
+use App\Mailer\SendMailer;
 use App\Repository\UserRepository;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -36,18 +37,25 @@ class ActivationController
     private $twig;
 
     /**
+     * @var SendMailer
+     */
+    private $sendMailer;
+
+    /**
      * ActivationController constructor.
      * @param UserRepository $userRepo
      * @param FormFactoryInterface $formFactory
      * @param UrlGeneratorInterface $urlGenerator
      * @param Environment $twig
+     * @param SendMailer $sendMailer
      */
-    public function __construct(UserRepository $userRepo, FormFactoryInterface $formFactory, UrlGeneratorInterface $urlGenerator, Environment $twig)
+    public function __construct(UserRepository $userRepo, FormFactoryInterface $formFactory, UrlGeneratorInterface $urlGenerator, Environment $twig, SendMailer $sendMailer)
     {
         $this->userRepo = $userRepo;
         $this->formFactory = $formFactory;
         $this->urlGenerator = $urlGenerator;
         $this->twig = $twig;
+        $this->sendMailer = $sendMailer;
     }
 
 
@@ -75,10 +83,7 @@ class ActivationController
 
         if($formHandler->handle($form)) {
 
-            /*
-             * Faire l'envoie d'email ici
-             */
-
+            $this->sendMailer->send("Vérification de votre compte", "contact@lucasbassand.com", $user->getEmail(), "emails/verif.html.twig");
             return new RedirectResponse($this->urlGenerator->generate('success', ['token' => $token]));
         }
 

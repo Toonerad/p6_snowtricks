@@ -4,12 +4,23 @@
 
 {% block title %} Inscription | Snowtricks{% endblock %}
 
+{% block stylesheets %}
+    <style>
+        .d-block {
+            display: none !important;
+        }
+    </style>
+{% endblock %}
+
 {% block body %}
 
     <section class="py-xl bg-cover bg-size--cover" style="background-image: url('{{ asset('img/register_background.jpg') }}');background-position: center;background-attachment: fixed;background-repeat: no-repeat;" >
         <span class="mask bg-primary alpha-6"></span>
         <div class="container d-flex align-items-center no-padding">
             <div class="col">
+
+                {% include 'errors_registration.html.twig' %}
+
                 <div class="row justify-content-center">
                     <div class="col-lg-4">
                         <div class="card bg-primary text-white">
@@ -20,6 +31,7 @@
                                 <span class="clearfix"></span>
                                 <h2 class="heading h2 text-white pt-3 pb-5">Bienvenue,<br>veuillez remplir ce formulaire</h2>
                                 {{ form_start(form) }}
+
                                 <div class="form-group">
                                     {{ form_row(form.username, {'label': false ,'attr': {'placeholder': 'Pseudo'}}) }}
                                 </div>

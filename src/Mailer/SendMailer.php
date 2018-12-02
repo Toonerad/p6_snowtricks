@@ -6,7 +6,10 @@
  * Time: 02:36
  */
 
+
+
 namespace App\Mailer;
+use Twig\Environment;
 
 class SendMailer
 {
@@ -58,5 +61,3 @@ class SendMailer
     }
 
 }
-
-use Twig\Environment;
