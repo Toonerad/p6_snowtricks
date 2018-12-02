@@ -18,6 +18,9 @@ security:
             anonymous: true
             provider: in_database
 
+            pattern: ^/
+            user_checker: App\Security\UserChecker
+
             form_login:
                 login_path: security_login
                 check_path: security_login

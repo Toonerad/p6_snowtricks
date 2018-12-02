@@ -5,20 +5,22 @@
 {% block title %} Se connecter | Snowtricks {% endblock %}
 
 {% block body %}
-
     <section class="py-xl bg-cover bg-size--cover" style="background-image: url('{{ asset('img/register_background.jpg') }}');background-position: center;background-attachment: fixed;background-repeat: no-repeat;" >
         <span class="mask bg-primary alpha-6"></span>
         <div class="container d-flex align-items-center no-padding">
             <div class="col">
-                <!--
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <span class="alert-inner--icon"><i class="fas fa-check"></i></span>
-                    <span class="alert-inner--text"><strong>Bravo!</strong> Merci de vérifier votre email avant de vous connecter !</span>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>-->
 
+                {% if error is defined %}
+                    {% if error %}
+                        <div class="alert alert-inverse alert-dismissible fade show" role="alert">
+                            <span class="alert-inner--icon text-danger"><i class="fas fa-times"></i></span>
+                            <span class="alert-inner--text">{{ error.messageKey|trans(error.messageData, 'security') }}</span>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% endif %}
+                {% endif %}
 
                 <div class="row justify-content-center">
                     <div class="col-lg-4">
@@ -50,6 +52,9 @@
                         </div>
                     </div>
                 </div>
+
+
+
             </div>
         </div>
     </section>

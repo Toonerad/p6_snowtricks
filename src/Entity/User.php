@@ -57,7 +57,7 @@ class User implements UserInterface
     private $token;
 
     /**
-     * @ORM\Column(type="string", length=5)
+     * @ORM\Column(type="string", length=6)
      */
     private $code;
 
