@@ -29,7 +29,7 @@
                     {{ form_row(formTricksAdd.name, {'label': 'Nom de la figure' ,'attr': {'placeholder': 'ex: Backflip'}})}}
                     {{ form_row(formTricksAdd.description, {'label': 'Description' ,'attr': {'placeholder': 'Description de votre figure.. '}})}}
                     {{ form_row(formTricksAdd.category, {'label': 'Catégorie'} )}}
-
+                    {{ form_row(formTricksAdd.images) }}
 
                 </div>
         </div>
@@ -53,4 +53,11 @@
     <script>
 			CKEDITOR.replace( 'ckeditor' );
 	</script>
+    <script>
+        $(document).ready(function() {
+
+        })
+    </script>
+    
+    
 {% endblock %}
