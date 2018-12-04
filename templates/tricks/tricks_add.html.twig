@@ -22,20 +22,19 @@
 
     <section class="slice slice-lg">
         <div class="container">
-            <div class="row align-items-center cols-xs-space cols-sm-space cols-md-space">
-                <div class="col-lg-6">
+                <div class="col-md-auto">
 
                     {{ form_start(formTricksAdd) }}
 
                     {{ form_row(formTricksAdd.name, {'label': 'Nom de la figure' ,'attr': {'placeholder': 'ex: Backflip'}})}}
-
                     {{ form_row(formTricksAdd.description, {'label': 'Description' ,'attr': {'placeholder': 'Description de votre figure.. '}})}}
-
                     {{ form_row(formTricksAdd.category, {'label': 'Catégorie'} )}}
 
 
                 </div>
-                <div class="col-lg-5 ml-lg-auto">
+        </div>
+        <div class="container">
+        <div class="col-lg-5 ml-lg-auto" style="margin-top: 5em">
                     <h3 class="heading heading-3 strong-300">
                         Avant d'ajouter une figure
                     </h3>
@@ -45,8 +44,13 @@
                     <button type="submit" class="btn btn-block btn-lg bg-gradient-cyan mt-4">Valider</button>
                     {{ form_end(formTricksAdd) }}
                 </div>
-            </div>
-        </div>
+</div>
     </section>
 
+{% endblock %}
+{% block javascripts %}
+    <script src="https://cdn.ckeditor.com/4.11.1/standard/ckeditor.js"></script>
+    <script>
+			CKEDITOR.replace( 'ckeditor' );
+	</script>
 {% endblock %}

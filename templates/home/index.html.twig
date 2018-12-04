@@ -46,7 +46,6 @@
                                         <a href="{{ path('tricks_show', {'id': trick.id}) }}"><h5 class="heading h5 mb-3">{{ trick.name }}</h5></a>
                                     </div>
                                 </div>
-                                <p class="card-text">{{ trick.description|slice(0,20) }}...</p>
                                 {% if app.user %}
                                     <div class="col">
                                         <div class="card-icon-actions card-icon-actions-lg text-right">

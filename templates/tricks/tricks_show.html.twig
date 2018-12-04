@@ -54,8 +54,10 @@
             </div>
 
             <h2 style="margin-left: 20px ">Description:</h2>
-            <div class="row font-weight-600 text-dark" style="margin-left: 10px; margin-right: 10px">
-               {{ trick.description }}
+            <div class="font-weight-600 text-dark" style="margin-left: 10px; margin-right: 10px">
+                {% autoescape %}
+               {{ trick.description|raw }}
+                {% endautoescape %}
             </div>
 
 
