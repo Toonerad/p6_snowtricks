@@ -20,6 +20,7 @@ class TrickAddFormHandler
      */
     private $trickRepository;
 
+
     /**
      * TrickAddFormHandler constructor.
      * @param TrickRepository $trickRepository
@@ -41,5 +42,6 @@ class TrickAddFormHandler
         }
         return false;
     }
+
 
 }

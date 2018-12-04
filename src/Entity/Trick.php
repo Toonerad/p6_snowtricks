@@ -36,6 +36,7 @@ class Trick
      */
     private $createdAt;
 
+
     /**
      * Trick constructor.
      */
