@@ -22,29 +22,34 @@
 
     <section class="slice slice-lg">
         <div class="container">
-                <div class="col-md-auto">
+                <div  class="col-md-auto">
 
                     {{ form_start(formTricksAdd) }}
 
                     {{ form_row(formTricksAdd.name, {'label': 'Nom de la figure' ,'attr': {'placeholder': 'ex: Backflip'}})}}
                     {{ form_row(formTricksAdd.description, {'label': 'Description' ,'attr': {'placeholder': 'Description de votre figure.. '}})}}
                     {{ form_row(formTricksAdd.category, {'label': 'Catégorie'} )}}
-                    {{ form_row(formTricksAdd.images) }}
+
 
                 </div>
         </div>
         <div class="container">
-        <div class="col-lg-5 ml-lg-auto" style="margin-top: 5em">
-                    <h3 class="heading heading-3 strong-300">
-                        Avant d'ajouter une figure
-                    </h3>
-                    <p class="">
-                        Merci de vérifier toutes les informations avant de soumettre une figure. Son titre, sa description ainsi que la catégorie. Vous pourrez tout de même éditer votre figure après soumission.
-                    </p>
-                    <button type="submit" class="btn btn-block btn-lg bg-gradient-cyan mt-4">Valider</button>
-                    {{ form_end(formTricksAdd) }}
+            <div class="row">
+                <div class="col-md-6">
                 </div>
-</div>
+                <div class="col-lg-5 ml-lg-auto" style="margin-top: 5em">
+                     <h3 class="heading heading-3 strong-300">
+                          Avant d'ajouter une figure
+                     </h3>
+                      <p class="">
+                         Merci de vérifier toutes les informations avant de soumettre une figure. Son titre, sa description ainsi que la catégorie. Vous pourrez tout de même éditer votre figure après soumission.
+                      </p>
+                       <button type="submit" class="btn btn-block btn-lg bg-gradient-cyan mt-4">Valider</button>
+                       {{ form_end(formTricksAdd) }}
+                </div>
+            </div>
+        </div>
+
     </section>
 
 {% endblock %}
@@ -55,9 +60,46 @@
 	</script>
     <script>
         $(document).ready(function() {
+            var $addTagButton = jQuery('<button type="button" class="add_image_link"> Ajouter une image</button>');
+            var $collectionHolder = jQuery('#trick_add_images');
+
+            console.log('Collection Holder: ' + $collectionHolder);
+
+            // Add "Ajouter une image"
+            $collectionHolder.append($addTagButton);
+
+            console.log('CollectionHolder find: ' + $collectionHolder.find('input').length);
+            $collectionHolder.data('index', $collectionHolder.find('.form-group').length);
+
+            $addTagButton.on('click', function(e) {
+              addImageForm($collectionHolder, $addTagButton);
+            })
+
+            addImageForm($collectionHolder, $addTagButton);
 
         })
+
+        function addImageForm($collectionHolder, $newLink) {
+          var prototype = $collectionHolder.data('prototype');
+          console.log('Prototype: ' + prototype);
+
+          var index = $collectionHolder.data('index');
+          console.log('Index: ' + index);
+
+          var newForm = prototype;
+
+          newForm = newForm.replace(/__name__label__/g, 'Image n°' + (index+1));
+          newForm = newForm.replace(/__name__/g, index);
+
+          $collectionHolder.data('index', index + 1);
+
+          $newLink.before(newForm)
+
+        }
+
+
+
     </script>
-    
+
     
 {% endblock %}

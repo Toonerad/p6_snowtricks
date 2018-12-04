@@ -43,12 +43,6 @@ class TrickAddFormHandler
         if($form->isSubmitted() && $form->isValid())
         {
             $trick = $form->getData();
-
-            foreach ($trick->getImages() as $image) {
-                $fileName = $this->fileUploader->upload($image->getFile());
-                $image->setFile($fileName);
-            }
-
             $this->trickRepository->save($trick);
 
             return true;

@@ -65,6 +65,7 @@ $(document).ready(function() {
     
 
     // Custom input file
+
     $('.custom-input-file').each(function() {
         var $input = $(this),
             $label = $input.next('label'),
