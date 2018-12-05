@@ -11,7 +11,6 @@ namespace App\Controller;
 
 use App\Repository\TrickRepository;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -41,7 +40,6 @@ class TricksDeleteController
      */
     private $urlGenerator;
 
-
     /**
      * TricksDeleteController constructor.
      * @param TrickRepository $trickRepository
@@ -67,6 +65,7 @@ class TricksDeleteController
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
+     * @return RedirectResponse
      */
     public function deleteTrick(Request $request)
     {
@@ -78,6 +77,7 @@ class TricksDeleteController
             $this->trickRepository->delete($trick);
             return new RedirectResponse($this->urlGenerator->generate('tricks'));
         }
+
 
         return new Response($this->twig->render('tricks/tricks_delete.html.twig', [
             'form' => $form->createView(),
