@@ -31,7 +31,6 @@
             </div>
 
             <div class="row" id="tricks" data-offset="0" data-limit="8">
-
             </div>
             <div class="row justify-content-center">
                 <div class="col-lg-3">
@@ -47,7 +46,6 @@
 {% block javascripts %}
     <script>
         $( document ).ready(function () {
-
             var offset = $('#tricks').data('offset');
             var limit = $('#tricks').data('limit');
             var total = 0;
@@ -55,7 +53,7 @@
             function request(offset, limit)
             {
                 $.ajax({
-                    url: "{{ path('ajax') }}",
+                    url: "{{ path('tricks_more') }}",
                     method: "POST",
                     data: {
                         'offset': offset,

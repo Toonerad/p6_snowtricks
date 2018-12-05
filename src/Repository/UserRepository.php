@@ -19,6 +19,12 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, User::class);
     }
 
+
+    public function flush()
+    {
+        $this->_em->flush();
+    }
+
 //    /**
 //     * @return User[] Returns an array of User objects
 //     */

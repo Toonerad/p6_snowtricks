@@ -33,7 +33,7 @@ class AjaxController
 
 
     /**
-     * @Route(path="/ajax", name="ajax", methods={"POST"})
+     * @Route(path="/tricks_more", name="tricks_more", methods={"POST"})
      *
      * @param Request $request
      * @return JsonResponse
