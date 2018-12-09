@@ -1,4 +1,4 @@
--{% extends 'base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}Suprimmer une figure | SnowTricks{% endblock %}
 
@@ -20,10 +20,6 @@
                     </div>
                 </div>
             </div>
-
-
-
-        </div>
         <div class="row justify-content-center">
             {# On met l'id de l'annonce dans la route de l'action du formulaire #}
             <form action="{{ path('delete_tricks', {'id': trick.id}) }}" method="post">
@@ -37,6 +33,8 @@
                 {{ form_rest(form) }}
             </form>
         </div>
+
+
 
         </div>
     </section>

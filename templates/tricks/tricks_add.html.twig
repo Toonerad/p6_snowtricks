@@ -4,6 +4,30 @@
 
 {% block title %}Ajouter une figure | SnowTricks{% endblock %}
 
+{% block stylesheets %}
+
+<style>
+    .custom-file-label {
+        display: none;
+    }
+</style>
+
+{% endblock %}
+
+
+{% import _self as formMacros %}
+{% macro printImageRow(imageForm) %}
+    <div class="js-image-item" style="margin: 20px;">
+        <a href="#" class="js-remove-image" style="margin-top: 5px">
+           <span class="fa fa-trash"></span> Supprimer
+        </a>
+        {% form_theme imageForm 'form_div_layout.html.twig' %}
+        {{ form_errors(imageForm) }}
+
+        {{ form_row(imageForm.file) }}
+    </div>
+{% endmacro %}
+
 {% block body %}
 
     <section class="slice slice-xl">
@@ -31,14 +55,34 @@
                     {{ form_row(formTricksAdd.category, {'label': 'Catégorie'} )}}
 
 
+                    <div class="row justify-content-center js-image-wrapper"
+                         data-imageprototype="{{ formMacros.printImageRow(formTricksAdd.images.vars.prototype)|e('html_attr') }}"
+                         data-index="{{ formTricksAdd.images|length }}">
+                        {% if formTricksAdd.images|length == 0 %}
+                            {# prevents weird label from showing up #}
+                            {{ form_widget(formTricksAdd.images) }}
+                        {% else %}
+                            {% for image in formTricksAdd.images %}
+                                {{ formMacros.printImageRow(image) }}
+                            {% endfor %}
+                        {% endif %}
+
+
+                        <a href="" class="btn btn-info js-image-add" style="max-height: 45px; margin-top: 30px ">
+                            <span class="fa fa-plus-circle"></span>
+                            Ajouter une images
+                        </a>
+
+                    </div>
+
+
+
+
                 </div>
         </div>
         <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-
-                </div>
-                <div class="col-lg-5 ml-lg-auto" style="margin-top: 5em">
+            <div class="row justify-content-center">
+                <div class="col-lg-8" style="margin-top: 5em">
                      <h3 class="heading heading-3 strong-300">
                           Avant d'ajouter une figure
                      </h3>
@@ -60,6 +104,31 @@
 			CKEDITOR.replace( 'ckeditor' );
 	</script>
     <script>
+         (function ($) {
+            $(document).ready(function() {
+                var $wrapper = $('.js-image-wrapper');
+                $wrapper.on('click', '.js-remove-image', function(e) {
+                    e.preventDefault();
+                    $(this).closest('.js-image-item')
+                        .fadeOut()
+                        .remove();
+                });
+                $wrapper.on('click', '.js-image-add', function(e) {
+                    e.preventDefault();
+                    // Get the data-prototype explained earlier
+                    var imageprototype = $wrapper.data('imageprototype');
+                    // get the new index
+                    var index = $wrapper.data('index');
+                    // Replace '__name__' in the prototype's HTML to
+                    // instead be a number based on how many items we have
+                    var newForm = imageprototype.replace(/__name__/g, index);
+                    // increase the index with one for the next item
+                    $wrapper.data('index', index + 1);
+                    // Display the form in the page before the "new" link
+                    $(this).before(newForm);
+                });
+            });
+        })(jQuery);
     </script>
 
     

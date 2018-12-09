@@ -39,11 +39,17 @@ class Trick
     private $createdAt;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="trick", cascade={"persist"}, orphanRemoval=true)
+     */
+    private $images;
+
+    /**
      * Trick constructor.
      */
     public function __construct()
     {
         $this->createdAt = new \DateTime();
+        $this->images = new ArrayCollection();
     }
 
 
@@ -97,6 +103,32 @@ class Trick
     public function setCreatedAt($createdAt): void
     {
         $this->createdAt = $createdAt;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getImages()
+    {
+        return $this->images;
+    }
+
+    /**
+     * @param Image $picture
+     */
+    public function addImage(Image $picture)
+    {
+        $picture->setTrick($this);
+        $this->images->add($picture);
+    }
+
+    /**
+     * @param Image $picture
+     */
+    public function removeImage(Image $picture)
+    {
+        $picture->setTrick(null);
+        $this->images->removeElement($picture);
     }
 
 }
