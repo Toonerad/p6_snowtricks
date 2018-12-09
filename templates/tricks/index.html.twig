@@ -31,7 +31,6 @@
             </div>
 
             <div class="row" id="tricks" data-offset="0" data-limit="8">
-
             </div>
             <div class="row justify-content-center">
                 <div class="col-lg-3">
@@ -47,7 +46,6 @@
 {% block javascripts %}
     <script>
         $( document ).ready(function () {
-
             var offset = $('#tricks').data('offset');
             var limit = $('#tricks').data('limit');
             var total = 0;
@@ -55,7 +53,7 @@
             function request(offset, limit)
             {
                 $.ajax({
-                    url: "{{ path('ajax') }}",
+                    url: "{{ path('tricks_more') }}",
                     method: "POST",
                     data: {
                         'offset': offset,
@@ -70,7 +68,6 @@
                         for(var i=0; i < result.length; i++)
                         {
                             var id = result[i]['id'];
-                            var minidesc = result[i]['description'].substring(0, 20);
                             var html =
                                 "<div class=\"col-lg-3\" style=\"margin-bottom: 30px\">\n" +
                                 "                    <div class=\"card\">\n" +
@@ -83,12 +80,11 @@
                                 "                                    <a href=\"/tricks /"+ id +" \"><h5 class=\"heading heading-5 strong-600\">" + result[i]['name'] +  "</h5></a>  " +
                                 "                                </div>\n" +
                                 "                            </div>\n" +
-                                "                            <p class=\"card-text\"> " + minidesc + "...</p>" +
                                 "                            {% if app.user %}\n" +
                                 "                            <div class=\"col\">\n" +
                                 "                                <div class=\"card-icon-actions card-icon-actions-lg text-right\">\n" +
                                 "                                    <a href=\"/tricks/" + id + "/edit  \"><i class=\"fas fa-pencil-alt\"></i></a>\n" +
-                                "                                    <a href=\"#\"><i class=\"fas fa-trash-alt\"></i></a>\n" +
+                                "                                    <a href=\"/tricks/delete/" + id + "\"><i class=\"fas fa-trash-alt\"></i></a>\n" +
                                 "                                </div>\n" +
                                 "                            </div>\n" +
                                 "                            {% endif %}\n" +

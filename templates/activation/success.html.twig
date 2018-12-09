@@ -18,6 +18,7 @@
                                 <h1 class="heading h1 text-white">
                                     Votre compte est maintenant activé !
                                 </h1>
+                                <h3 class="text-white">Redirection dans 3 secondes...</h3>
                             </div>
                         </div>
                     </div>
@@ -29,4 +30,12 @@
 {% endblock %}
 {% block footer %}
 
+{% endblock %}
+{% block javascripts %}
+    <script>
+        function redirect(){
+            self.location.href="{{ path('homepage') }}"
+        }
+        setTimeout(redirect,3000)
+    </script>
 {% endblock %}

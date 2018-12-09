@@ -34,7 +34,7 @@
                <div class="col">
                    <div class="card-icon-actions card-icon-actions-lg text-right">
                        <a href="{{ path('tricks_edit', {'id': trick.id}) }}"><i class="fas fa-pencil-alt"></i></a>
-                       <a href="#"><i class="fas fa-trash-alt"></i></a>
+                       <a href="{{ path('delete_tricks', {'id': trick.id}) }}"><i class="fas fa-trash-alt"></i></a>
                    </div>
                </div>
             {% endif %}
@@ -54,8 +54,10 @@
             </div>
 
             <h2 style="margin-left: 20px ">Description:</h2>
-            <div class="row font-weight-600 text-dark" style="margin-left: 10px; margin-right: 10px">
-               {{ trick.description }}
+            <div class="font-weight-600 text-dark" style="margin-left: 10px; margin-right: 10px">
+                {% autoescape %}
+               {{ trick.description|raw }}
+                {% endautoescape %}
             </div>
 
 

@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Suprimmer une figure | SnowTricks{% endblock %}
+
+{% block navbar %}navbar-light{% endblock %}
+
+{% block body %}
+
+    <section class="slice slice-xl">
+        <div class="container">
+            <div class="row justify-content-center" style="margin-bottom: 20px">
+                <div class="col-lg-7">
+                    <div class="text-center pt-lg-md">
+                        <h2 class="heading h1 mb-4">
+                            Supprimer une figure
+                        </h2>
+                        <p class="lead lh-180">
+                            Etes-vous certain de vouloir supprimer la figure "{{ trick.name }}" ?
+                        </p>
+                    </div>
+                </div>
+            </div>
+        <div class="row justify-content-center">
+            {# On met l'id de l'annonce dans la route de l'action du formulaire #}
+            <form action="{{ path('delete_tricks', {'id': trick.id}) }}" method="post">
+                <a href="{{ path('tricks_show', {'id': trick.id}) }}" class="btn btn-default">
+                    <i class="glyphicon glyphicon-chevron-left"></i>
+                    Voir la figure
+                </a>
+                {# Ici j'ai écrit le bouton de soumission à la main #}
+                <input type="submit" value="Supprimer" class="btn btn-danger" />
+                {# Ceci va générer le champ CSRF #}
+                {{ form_rest(form) }}
+            </form>
+        </div>
+
+
+
+        </div>
+    </section>
+{% endblock %}
+{% block footer %}{% endblock %}

@@ -75,6 +75,8 @@ class ActivationController
         $user = $this->userRepo->findOneBy(['token' => $token]);
         if(!$user){
             return new RedirectResponse($this->urlGenerator->generate('homepage'));
+        }elseif ($user->getIsActivated() != 0){
+            return new RedirectResponse($this->urlGenerator->generate('homepage'));
         }
         $codeUser = $user->getCode();
 
@@ -82,8 +84,10 @@ class ActivationController
 
 
         if($formHandler->handle($form)) {
+            $user->setIsActivated(1);
+            $this->userRepo->flush();
+            $this->sendMailer->send("Vérification de votre compte", "contact@lucasbassand.com", $user->getEmail(), "emails/success.html.twig");
 
-            $this->sendMailer->send("Vérification de votre compte", "contact@lucasbassand.com", $user->getEmail(), "emails/verif.html.twig");
             return new RedirectResponse($this->urlGenerator->generate('success', ['token' => $token]));
         }
 

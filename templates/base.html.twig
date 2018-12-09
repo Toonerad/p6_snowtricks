@@ -15,8 +15,9 @@
 
 
     <!-- Boomerang CSS (including Bootstrap) -->
-    <link type="text/css" href="{{ asset('css/theme.css') }}" rel="stylesheet">
     {% block stylesheets %}{% endblock %}
+    <link type="text/css" href="{{ asset('css/theme.css') }}" rel="stylesheet">
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-transparent  {% block navbar %}navbar-dark{% endblock %} bg-dark py-4">
@@ -99,7 +100,7 @@
 
 {% block footer %}
 
-<footer class="pt-5 pb-3 footer  footer-dark bg-tertiary">
+<footer class="pt-5 pb-3 footer footer-dark bg-tertiary">
     <div class="container">
         <div class="d-flex align-items-center">
         <span class="">

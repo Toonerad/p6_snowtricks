@@ -10,6 +10,7 @@ namespace App\Handler\Form;
 
 
 use App\Repository\TrickRepository;
+use App\Service\FileUploader;
 use Symfony\Component\Form\FormInterface;
 
 class TrickAddFormHandler
@@ -21,12 +22,19 @@ class TrickAddFormHandler
     private $trickRepository;
 
     /**
+     * @var FileUploader
+     */
+    private $fileUploader;
+
+    /**
      * TrickAddFormHandler constructor.
      * @param TrickRepository $trickRepository
+     * @param FileUploader $fileUploader
      */
-    public function __construct(TrickRepository $trickRepository)
+    public function __construct(TrickRepository $trickRepository, FileUploader $fileUploader)
     {
         $this->trickRepository = $trickRepository;
+        $this->fileUploader = $fileUploader;
     }
 
 
@@ -41,5 +49,6 @@ class TrickAddFormHandler
         }
         return false;
     }
+
 
 }
