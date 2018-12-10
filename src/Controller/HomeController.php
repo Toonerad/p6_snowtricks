@@ -37,8 +37,8 @@ class HomeController extends AbstractController
      */
     public function index(TrickRepository $repo)
     {
-
-        $tricks = $repo->findBy(array(), array('id' => 'DESC'),4);
+        //Wait before find system pagination
+        $tricks = $repo->findBy(array(), array('id' => 'DESC'));
 
         return new Response($this->twig->render('home/index.html.twig', [
             'tricks' => $tricks,

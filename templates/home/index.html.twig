@@ -38,7 +38,12 @@
                     <div class="col-lg-3" style="margin-bottom: 30px">
                         <div class="card">
                             <div class="card-image">
+                                {% for image in trick.images|slice(0,1) %}
+                                <a href="{{ path('tricks_show', {'id': trick.id}) }}" > <img src="{{ asset(image.webPath) }}" alt="{{ image.alt }}" class="img-fluid"></a>
+                                {% endfor %}
+                                {% if trick.images is empty %}
                                 <a href="{{ path('tricks_show', {'id': trick.id}) }}" > <img src="https://place-hold.it/270x200" class="img-fluid"></a>
+                                {% endif %}
                             </div>
                             <div class="card-body">
                                 <div class="row mb-1">
@@ -60,22 +65,20 @@
                 {% endfor %}
             </div>
 
+
+            {% if app.user %}
             <div class="px-4">
                 <div class="row justify-content-center cols-xs-space cols-sm-space cols-md-space">
                     <div class="col-lg-7">
                         <div class="text-center">
                             <div class="btn-container mt-5">
-                                <a href="{{ path('tricks') }}" class="btn btn-primary">
-                                    Voir toutes les figures
-                                </a>
-                               {% if app.user %}
                                    <a href="{{ path('tricks_add') }}" class="btn btn-link">Ajouter une figure</a>
-                                {% endif %}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            {% endif %}
 
         </div>
     </section>

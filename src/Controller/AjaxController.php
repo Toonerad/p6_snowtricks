@@ -10,7 +10,6 @@ namespace App\Controller;
 
 
 use App\Repository\TrickRepository;
-use http\Env\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -53,6 +52,7 @@ class AjaxController
                         'name' => $trick->getName(),
                         'description' => $trick->getDescription(),
                         'category' => $trick->getCategory(),
+                        'images' => $trick->getImages(),
                         ];
 
         }
