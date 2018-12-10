@@ -1,0 +1,26 @@
+Pour les figures
+
+Idée n°1:
+
+- Faire un bouton "Nombre de figures " avec une selection juste à coté (peut être un bouton avec ces deux eléments)
+- Quand la personne chosie par exemple 50
+- Dans ce cas :
+    Faire une requete ajax et affichés 50 figures
+
+
+Selection du bouton (10 - 50 - 100 ou tout)(exemple)
+Par défault ==> 10
+
+
+Idée n°2:
+
+- Faire un bouton "Voir plus"
+- Quand on clique sur le bouton, 8 figures s'ajoute en plus en dessous par exemple
+
+(Dans la technique)
+- Mettre une classe 'js-tricks' pour englober toutes les figures
+- Affiché au début 10 figures par exemple
+- Au clique du bouton:
+    - On mets la class en invisible
+    - On fais une nouvelles requetes ajax pour avoir 8 figures de plus
+    - On réaffiche la class
