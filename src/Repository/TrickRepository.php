@@ -19,6 +19,10 @@ class TrickRepository extends ServiceEntityRepository
         parent::__construct($registry, Trick::class);
     }
 
+    public function flush()
+    {
+        $this->_em->flush();
+    }
 
     public function save(Trick $trick)
     {

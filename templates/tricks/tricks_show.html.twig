@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ trick.name }} | SnowTricks{% endblock %}
+{% block title %}{{ trick.name }} {{ parent() }}{% endblock %}
 
 {% block navbar %}navbar-dark{% endblock %}
 
@@ -59,7 +59,13 @@
                {{ trick.description|raw }}
                 {% endautoescape %}
             </div>
-
+            
+            {# for image in trick.images %}
+                <img src="{{ asset(image.webPath) }}" alt="{{ image.alt }}">
+            {% endfor %}
+            {% if trick.images is empty %}
+            <h3>Pas d'image ici !</h3>
+            {% endif #}
 
 
         </div>

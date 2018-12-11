@@ -75,7 +75,7 @@ class TricksDeleteController
 
         if($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
             $this->trickRepository->delete($trick);
-            return new RedirectResponse($this->urlGenerator->generate('tricks'));
+            return new RedirectResponse($this->urlGenerator->generate('homepage'));
         }
 
 

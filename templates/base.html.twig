@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>{% block title %}{% endblock %}</title>
+    <title>{% block title %}| Snowtricks{% endblock %}</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700,800|Roboto:400,500,700" rel="stylesheet">
@@ -32,9 +32,6 @@
                 <h6 class="dropdown-header font-weight-600 d-lg-none px-0">Menu</h6>
                 <li class="nav-item ">
                     <a class="nav-link" href="{{ path('homepage') }}">Accueil</a>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link" href="{{ path('tricks') }}">Figures</a>
                 </li>
 
                 {% if not app.user %}

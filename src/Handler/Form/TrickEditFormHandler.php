@@ -32,8 +32,7 @@ class TrickEditFormHandler
     {
         if($form->isSubmitted() && $form->isValid())
         {
-            $trick = $form->getData();
-            $this->trickRepository->save($trick);
+            $this->trickRepository->flush();
 
             return true;
         }
