@@ -1,6 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil | Snowtricks{% endblock %}
+{% block title %}Accueil {{ parent() }}{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        card-image{
+            position: relative;
+            width: 255px;
+            height: 200px;
+            overflow: hidden;
+        }
+        img-tricks{
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+            right: -9999px;
+            bottom: -9999px;
+            margin: auto;
+        }
+    </style>
+{% endblock %}
 
 {% block body %}
     <section id="header" class="spotlight parallax bg-cover bg-size--cover" data-spotlight="fullscreen" style="background-image: url('{{ asset('img/home_background.jpg') }}');background-position: center;background-attachment: fixed;background-repeat: no-repeat; ">
@@ -32,17 +51,25 @@
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row" id="tricks" data-offset="0" data-limit="8">
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-3">
+                    <button id="more" type="button" class="btn btn-block btn-outline-tertiary">Voir plus <i id="load" class="fas fa-spinner fa-spin"></i></button>
 
-                {% for trick in tricks %}
+                </div>
+            </div>
+
+            {#<div class="row" id="tricks" data-offset="0" data-limit="8">
+                {%  for trick in tricks %}
                     <div class="col-lg-3" style="margin-bottom: 30px">
                         <div class="card">
                             <div class="card-image">
                                 {% for image in trick.images|slice(0,1) %}
-                                <a href="{{ path('tricks_show', {'id': trick.id}) }}" > <img src="{{ asset(image.webPath) }}" alt="{{ image.alt }}" class="img-fluid"></a>
+                                <a href="{{ path('tricks_show', {'id': trick.id}) }}" > <img src="{{ asset(image.webPath) }}" alt="{{ image.alt }}" class="img-fluid img-tricks" style="width: 100%; max-height: 200px;"></a>
                                 {% endfor %}
                                 {% if trick.images is empty %}
-                                <a href="{{ path('tricks_show', {'id': trick.id}) }}" > <img src="https://place-hold.it/270x200" class="img-fluid"></a>
+                                <a href="{{ path('tricks_show', {'id': trick.id}) }}" > <img src="{{ asset('img/default.png') }}" alt="No trick image" class="img-fluid"></a>
                                 {% endif %}
                             </div>
                             <div class="card-body">
@@ -63,7 +90,7 @@
                         </div>
                     </div>
                 {% endfor %}
-            </div>
+            </div>#}
 
 
             {% if app.user %}
@@ -104,7 +131,80 @@
         </div>
     </section>
 
-
-
-
 {% endblock %}
+{% block javascripts %}
+    <script>
+        $( document ).ready(function () {
+            var offset = $('#tricks').data('offset');
+            var limit = $('#tricks').data('limit');
+            var total = 0;
+
+            function request(offset, limit)
+            {
+                $.ajax({
+                    url: "{{ path('tricks_more') }}",
+                    method: "POST",
+                    data: {
+                        'offset': offset,
+                        'limit': limit,
+                    },
+                    success: function (result) {
+                        total = result.length;
+                        if (total < limit ) {
+                            $("#more").prop('disabled',true);
+                        }
+
+                        for(var i=0; i < result.length; i++)
+                        {
+                            var trick = result[i];
+                            var id = result[i]['id'];
+                            var images = result[i]['images']['0']['webPath'];
+                            console.log(trick);
+                            var html =
+                                "<div class=\"col-lg-3\" style=\"margin-bottom: 30px\">\n" +
+                                "                    <div class=\"card\">\n" +
+                                "                        <div class=\"card-image\">\n" +
+                                "                           <a href=\"/tricks/"+ id +" \" > <img src=\""+ images +"\" class=\"img-fluid\"></a>\n" +
+                                "                        </div>\n" +
+                                "                        <div class=\"card-body\">\n" +
+                                "                            <div class=\"row mb-1\">\n" +
+                                "                                <div class=\"col\">\n" +
+                                "                                    <a href=\"/tricks /"+ id +" \"><h5 class=\"heading heading-5 strong-600\">" + result[i]['name'] +  "</h5></a>  " +
+                                "                                </div>\n" +
+                                "                            </div>\n" +
+                                "                            {% if app.user %}\n" +
+                                "                            <div class=\"col\">\n" +
+                                "                                <div class=\"card-icon-actions card-icon-actions-lg text-right\">\n" +
+                                "                                    <a href=\"/tricks/" + id + "/edit  \"><i class=\"fas fa-pencil-alt\"></i></a>\n" +
+                                "                                    <a href=\"/tricks/delete/" + id + "\"><i class=\"fas fa-trash-alt\"></i></a>\n" +
+                                "                                </div>\n" +
+                                "                            </div>\n" +
+                                "                            {% endif %}\n" +
+                                "                        </div>\n" +
+                                "                    </div>\n" +
+                                "                </div>";
+
+
+                            $('#tricks').append(html);
+                        }
+                    }
+                });
+                $('#load').hide();
+                $('#tricks').animate({
+                    opacity: 1,
+                }, 1000);
+            }
+
+            request(offset, limit);
+            offset = $('#tricks').data("offset") + limit;
+
+            $('#more').on('click', function () {
+                $('#tricks').animate({
+                    opacity: 0,
+                }, 100);
+                request(offset, limit);
+                offset += $('#tricks').data("offset") + limit;
+            })
+        })
+    </script>
+{%  endblock %}

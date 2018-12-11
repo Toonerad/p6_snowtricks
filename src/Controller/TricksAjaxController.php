@@ -1,20 +1,18 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: lucas
- * Date: 24/11/2018
- * Time: 20:00
- */
 
 namespace App\Controller;
-
 
 use App\Repository\TrickRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class AjaxController
+/**
+ * Class TricksAjaxController
+ *
+ * @package \App\Controller
+ */
+class TricksAjaxController
 {
     /**
      * @var TrickRepository
@@ -32,7 +30,7 @@ class AjaxController
 
 
     /**
-     * @Route(path="/tricks_more", name="tricks_more", methods={"POST"})
+     * @Route(path="/ajax", name="tricks_more", methods={"POST"})
      *
      * @param Request $request
      * @return JsonResponse
@@ -44,21 +42,40 @@ class AjaxController
 
         $tricks = $this->trickRepository->findBy(array(), array('id' => 'DESC'), $limit, $offset);
 
-        $array = [];
+        $tricksArray = [];
+        $imagesArray = [];
 
         foreach ($tricks as $trick)
         {
-            $array[] = ['id' => $trick->getId(),
+
+            $images = $trick->getImages();
+
+            if($images->isEmpty()){
+                $tricksArray[] = ['id' => $trick->getId(),
+                    'name' => $trick->getName(),
+                    'description' => $trick->getDescription(),
+                    'category' => $trick->getCategory(),
+                    'images' => ['0' => [
+                        'webPath' => "/img/default.png"
+                    ]],
+                ];
+            }else {
+                foreach ($images as $image)
+                {
+                    $imagesArray[] = ['webPath' => $image->getWebPath(),];
+
+                    $tricksArray[] = ['id' => $trick->getId(),
                         'name' => $trick->getName(),
                         'description' => $trick->getDescription(),
                         'category' => $trick->getCategory(),
-                        'images' => $trick->getImages(),
-                        ];
+                        'images' => $imagesArray,
+                    ];
+                }
+            }
 
         }
 
-        return new JsonResponse($array);
+        return new JsonResponse($tricksArray);
 
     }
-
 }

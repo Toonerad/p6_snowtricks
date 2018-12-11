@@ -37,6 +37,7 @@ class TricksShowController extends AbstractController
         $trick = $this->trickRepository->find($request->attributes->get('id'));
 
 
+
         //A changer
         return $this->render('tricks/tricks_show.html.twig', [
             'trick' => $trick

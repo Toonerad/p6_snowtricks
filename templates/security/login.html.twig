@@ -2,7 +2,7 @@
 
 {% block navbar %}navbar-light{% endblock %}
 
-{% block title %} Se connecter | Snowtricks {% endblock %}
+{% block title %} Se connecter {{ parent() }}{% endblock %}
 
 {% block body %}
     <section class="py-xl bg-cover bg-size--cover" style="background-image: url('{{ asset('img/register_background.jpg') }}');background-position: center;background-attachment: fixed;background-repeat: no-repeat;" >

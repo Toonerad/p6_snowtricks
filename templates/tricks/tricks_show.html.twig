@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ trick.name }} | SnowTricks{% endblock %}
+{% block title %}{{ trick.name }} {{ parent() }}{% endblock %}
 
 {% block navbar %}navbar-dark{% endblock %}
 
