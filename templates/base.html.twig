@@ -50,8 +50,8 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="" id="navbar_main_dropdown_1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mon compte  </a>
                         <div class="dropdown-menu" aria-labelledby="navbar_1_dropdown_1">
-                            <span class="dropdown-item">Pseudo: {{ app.user.username }}</span>
                             <a class="dropdown-item" href="{{ path('tricks_add') }}">Ajouter une figure</a>
+                            <a class="dropdown-item" href="{{ path('users', {'username': app.user.username }) }}">Paramètres</a>
                             <a class="dropdown-item" data-toggle="modal" data-target="#modal_5" href="">Déconnexion</a>
 
                         </div>

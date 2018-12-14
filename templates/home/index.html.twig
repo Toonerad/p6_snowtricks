@@ -60,38 +60,6 @@
                 </div>
             </div>
 
-            {#<div class="row" id="tricks" data-offset="0" data-limit="8">
-                {%  for trick in tricks %}
-                    <div class="col-lg-3" style="margin-bottom: 30px">
-                        <div class="card">
-                            <div class="card-image">
-                                {% for image in trick.images|slice(0,1) %}
-                                <a href="{{ path('tricks_show', {'id': trick.id}) }}" > <img src="{{ asset(image.webPath) }}" alt="{{ image.alt }}" class="img-fluid img-tricks" style="width: 100%; max-height: 200px;"></a>
-                                {% endfor %}
-                                {% if trick.images is empty %}
-                                <a href="{{ path('tricks_show', {'id': trick.id}) }}" > <img src="{{ asset('img/default.png') }}" alt="No trick image" class="img-fluid"></a>
-                                {% endif %}
-                            </div>
-                            <div class="card-body">
-                                <div class="row mb-1">
-                                    <div class="col">
-                                        <a href="{{ path('tricks_show', {'id': trick.id}) }}"><h5 class="heading h5 mb-3">{{ trick.name }}</h5></a>
-                                    </div>
-                                </div>
-                                {% if app.user %}
-                                    <div class="col">
-                                        <div class="card-icon-actions card-icon-actions-lg text-right">
-                                            <a href="{{ path('tricks_edit', {'id': trick.id}) }}"><i class="fas fa-pencil-alt"></i></a>
-                                            <a href="{{ path('delete_tricks', {'id': trick.id}) }}"><i class="fas fa-trash-alt"></i></a>
-                                        </div>
-                                    </div>
-                                {% endif %}
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>#}
-
 
             {% if app.user %}
             <div class="px-4">
@@ -107,6 +75,70 @@
             </div>
             {% endif %}
 
+        </div>
+    </section>
+
+    <section class="slice slice-lg">
+        <div class="container">
+            <div class="mb-5 text-center">
+                <h3 class="heading h2">Offres disponible</h3>
+                <div class="fluid-paragraph text-center">
+                    <p class="lead mb-0">Choisissez votre offre ci-dessous.</p>
+                </div>
+            </div>
+            <div class="card-deck mb-3">
+                <div class="card card-pricing text-center px-3 mb-4">
+                    <div class="card-header py-4">
+                        <h4 class="mb-4">Pass Gratuit</h4>
+                        <h1 class="display-4 text-primary text-center">0€</h1>
+                        <span class="h6 text-muted">par mois</span>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled mb-4">
+                            <li>* 3 images par figures</li>
+                            <li>* 1 video par figures</li>
+                            <li>* Badge membre</li>
+                        </ul>
+                        {% if app.user %}
+                        <button type="button" disabled class="btn btn-primary mb-3">En possesion</button></a>
+                        {% else %}
+                        <a href="{{ path('security_registration') }}"> <button type="button" class="btn btn-primary mb-3">Inscrivez-vous</button></a>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="card card-pricing popular text-center px-3 mb-4 z-depth-3">
+                    <div class="card-header py-4">
+                        <h4 class="mb-4">Pass Premium</h4>
+                        <h1 class="display-4 text-primary text-center">15€</h1>
+                        <span class="h6 text-muted">par mois</span>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled mb-4">
+                            <li>* Badge premium sur votre profil</li>
+                            <li>* 5 images par figures</li>
+                            <li>* 3 vidéos par figures</li>
+                            <li>* Annulation gratuite</li>
+                        </ul>
+                        <button type="button" class="btn btn-primary mb-3">Voir l'offre</button>
+                    </div>
+                </div>
+                <div class="card card-pricing text-center px-3 mb-4">
+                    <div class="card-header py-4">
+                        <h4 class="mb-4">Pass Full</h4>
+                        <h1 class="display-4 text-primary text-center">30€</h1>
+                        <span class="h6 text-muted">par mois</span>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled mb-4">
+                            <li>* Badge full et premium sur votre profil</li>
+                            <li>* Images illimités par figures</li>
+                            <li>* Vidéos illimités par figures</li>
+                            <li>* Figures en Top de listes</li>
+                        </ul>
+                        <button type="button" class="btn btn-primary mb-3">Voir l'offre</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
