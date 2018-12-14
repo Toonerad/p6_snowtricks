@@ -60,6 +60,20 @@
                                     <hr />
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <h4>Description:</h4>
+                                    {% if user.description is not null %}
+                                        <p>{{ user.description }}</p>
+                                    {% else %}
+                                        <p><i>Pas encore de description..</i></p>
+                                    {% endif %}
+                                </div>
+                                <div class="col-lg-6">
+                                    <h4>Abonnement:</h4>
+                                    <img src="{{ asset('img/badge.jpg') }}" class="avatar avatar-lg mr-3"> Membre actif
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <br>
@@ -68,7 +82,7 @@
                             <div class="d-flex align-items-start">
                                 <div class="icon-text">
                                     <h2 class="heading">Activités de l'utilisiteur</h2>
-                                    <p>Dernières actions de l'utilisateur</p>
+                                    <p>Dernières actions de l'utilisateur (Commentaires)</p>
                                     <hr />
                                 </div>
                             </div>
