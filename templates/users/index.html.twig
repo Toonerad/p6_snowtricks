@@ -7,7 +7,27 @@
 
 {% block body %}
 {% if user is null %}
-    Utilisateur non trouvé
+    <section class="slice slice-xl">
+        <div class="container" style="height: 500px;">
+            <div class="row">
+                <div class="col-lg-12 justify-content-center">
+                    <div class="card bg-cover">
+                        <div class="card-body py-5">
+                            <div class="d-flex align-items-center">
+                                <div class="icon-text">
+                                    <h2 class="heading">Compte inexistant</h2>
+                                    <hr />
+                                </div>
+                            </div>
+                            <div class="row">
+                                    <h5>Le compte auxquels vous essayez d'accéder n'existe pas ou plus.</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 {% else %}
     <section class="slice slice-xl">
         <div class="container">
@@ -17,7 +37,7 @@
                         <div class="card-body py-5">
                             <div class="d-flex align-items-start">
                                 <div class="icon icon-lg">
-                                    <img src="{{ asset('img/Blank_Avatar.png') }}" class="avatar avatar-lg mr-3">
+                                    <span class="avatar avatar-lg bg-blue mr-3">{{ user.username|slice(0,1) }}</span>
                                 </div>
                                 <div class="icon-text">
                                     <h4 class="heading text-white">{{ user.username }}</h4>
@@ -26,7 +46,7 @@
                             </div>
                             <br>
                             {% if app.user == user %}
-                                <button type="button" class="btn btn-block btn-secondary">Editer votre profil</button>
+                                <a href="{{ path('users_edit', {'user': user.username}) }}"><button type="button" class="btn btn-block btn-secondary">Editer votre profil</button></a>
 
                             {% endif %}
                         </div>
@@ -89,6 +109,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
         </div>
     </section>
 

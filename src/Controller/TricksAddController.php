@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Trick;
 use App\Form\TrickAddType;
 use App\Handler\Form\TrickAddFormHandler;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -64,6 +65,7 @@ class TricksAddController
         $form = $this->formFactory->create(TrickAddType::class, $trick)->handleRequest($request);
 
         if($formHandler->handle($form)) {
+            $request->getSession()->getFlashBag()->add('success', 'Votre figure est correctement ajoutée. Merci de vérifier tout de même les informations ci-dessous');
             return new RedirectResponse($this->urlGenerator->generate('tricks_show', ['id' => $trick->getId()]));
         }
 
