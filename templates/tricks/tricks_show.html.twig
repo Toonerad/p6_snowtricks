@@ -29,15 +29,6 @@
     <section class="slice slice-xl spotlight parallax bg-cover bg-size--cover" data-spotlight="fullscreen" >
         <span class="mask bg-tertiary alpha-7"></span>
         <div class="container" id="test">
-            {% for message in app.flashes('success') %}
-            <div class="alert alert-secondary alert-shadow alert-dismissible fade show" role="alert">
-                <strong>Bravo!</strong> {{ message }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Fermer">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            {% endfor %}
-
             {% if app.user %}
                <div class="col">
                    <div class="card-icon-actions card-icon-actions-lg text-right">

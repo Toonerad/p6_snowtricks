@@ -65,7 +65,7 @@ class TricksAddController
         $form = $this->formFactory->create(TrickAddType::class, $trick)->handleRequest($request);
 
         if($formHandler->handle($form)) {
-            $request->getSession()->getFlashBag()->add('success', 'Votre figure est correctement ajoutée. Merci de vérifier tout de même les informations ci-dessous');
+            $request->getSession()->getFlashBag()->add('success', 'Votre figure est correctement ajoutée');
             return new RedirectResponse($this->urlGenerator->generate('tricks_show', ['id' => $trick->getId()]));
         }
 

@@ -60,7 +60,7 @@ class UsersEditController extends AbstractController
 
         if($userRoute != $userLogged){
             //Redirigez vers une page 404
-            //return new RedirectResponse($this->urlGenerator->generate('homepage'));
+            return new RedirectResponse($this->urlGenerator->generate('homepage'));
         }
 
         $form = $this->formFactory->create(UserEditType::class, $userLogged)->handleRequest($request);

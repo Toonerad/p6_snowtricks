@@ -75,6 +75,7 @@ class TricksDeleteController
 
         if($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
             $this->trickRepository->delete($trick);
+            $request->getSession()->getFlashBag()->add('success', 'La figure a été supprimé');
             return new RedirectResponse($this->urlGenerator->generate('homepage'));
         }
 

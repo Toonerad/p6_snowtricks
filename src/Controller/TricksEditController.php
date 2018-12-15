@@ -78,6 +78,7 @@ class TricksEditController
         $form = $this->formFactory->create(TrickEditType::class, $trick)->handleRequest($request);
 
         if($formHandler->handle($form)) {
+            $request->getSession()->getFlashBag()->add('success', 'Votre figure est correctement modifié');
             return new RedirectResponse($this->urlGenerator->generate('tricks_show', ['id' => $trick->getId()]));
         }
 

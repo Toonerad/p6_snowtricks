@@ -2,6 +2,7 @@
 
 {% block title %}Page d'édition de votre profil {{ parent() }}{% endblock %}
 
+{% block navbar %}navbar-light{% endblock %}
 
 {% block body %}
 
@@ -36,7 +37,8 @@
                         Avant d'éditer votre profil
                     </h3>
                     <p class="">
-                        Merci de vérifier toutes vos informations.
+                        - Vérifier vos informations<br>
+                        - Le lien de votre profil changera si le pseudo est modifié
                     </p>
                     <button type="submit" class="btn btn-block btn-lg bg-gradient-cyan mt-4">Modifier</button>
                     {{ form_end(formUserEdit) }}
