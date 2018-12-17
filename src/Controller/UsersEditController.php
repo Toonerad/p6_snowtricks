@@ -66,6 +66,7 @@ class UsersEditController extends AbstractController
         $form = $this->formFactory->create(UserEditType::class, $userLogged)->handleRequest($request);
 
         if($formHandler->handle($form)) {
+            $request->getSession()->getFlashBag()->add('success', 'Profil modifié');
             return new RedirectResponse($this->urlGenerator->generate('users', ['username' => $userLogged->getUsername() ]));
         }
 
