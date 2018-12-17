@@ -11,6 +11,7 @@ namespace App\Handler\Form;
 
 use App\Repository\TrickRepository;
 use App\Service\FileUploader;
+use App\Service\Slugify;
 use Symfony\Component\Form\FormInterface;
 
 class TrickAddFormHandler
@@ -43,6 +44,8 @@ class TrickAddFormHandler
         if($form->isSubmitted() && $form->isValid())
         {
             $trick = $form->getData();
+            $slug = Slugify::slugify($trick->getName());
+            $trick->setSlug($slug);
             $this->trickRepository->save($trick);
 
             return true;

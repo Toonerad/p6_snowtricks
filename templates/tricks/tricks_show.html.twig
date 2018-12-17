@@ -32,8 +32,8 @@
             {% if app.user %}
                <div class="col">
                    <div class="card-icon-actions card-icon-actions-lg text-right">
-                       <a href="{{ path('tricks_edit', {'id': trick.id}) }}"><i class="fas fa-pencil-alt"></i></a>
-                       <a href="{{ path('delete_tricks', {'id': trick.id}) }}"><i class="fas fa-trash-alt"></i></a>
+                       <a href="{{ path('tricks_edit', {'slug': trick.slug}) }}"><i class="fas fa-pencil-alt"></i></a>
+                       <a href="{{ path('delete_tricks', {'slug': trick.slug}) }}"><i class="fas fa-trash-alt"></i></a>
                    </div>
                </div>
             {% endif %}

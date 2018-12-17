@@ -9,6 +9,7 @@
 namespace App\Handler\Form;
 
 use App\Repository\TrickRepository;
+use App\Service\Slugify;
 use Symfony\Component\Form\FormInterface;
 
 class TrickEditFormHandler
@@ -33,6 +34,7 @@ class TrickEditFormHandler
         if($form->isSubmitted() && $form->isValid())
         {
             $trick = $form->getData();
+            $trick->setSlug(Slugify::slugify($trick->getName()));
             $trick->setCreatedAt(new \DateTime());
             $this->trickRepository->save($trick);
 
