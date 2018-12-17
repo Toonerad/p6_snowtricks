@@ -43,12 +43,15 @@ class TricksAjaxController
         $tricks = $this->trickRepository->findBy(array(), array('id' => 'DESC'), $limit, $offset);
 
         $tricksArray = [];
-        $imagesArray = [];
 
         foreach ($tricks as $trick)
         {
-
             $images = $trick->getImages();
+            $webPath = [];
+
+            foreach ($images as $image) {
+                $webPath[] = ['webPath' => $image->getWebPath()];
+            }
 
             if($images->isEmpty()){
                 $tricksArray[] = ['id' => $trick->getId(),
@@ -60,17 +63,14 @@ class TricksAjaxController
                     ]],
                 ];
             }else {
-                foreach ($images as $image)
-                {
-                    $imagesArray[] = ['webPath' => $image->getWebPath(),];
-
-                    $tricksArray[] = ['id' => $trick->getId(),
-                        'name' => $trick->getName(),
-                        'description' => $trick->getDescription(),
-                        'category' => $trick->getCategory(),
-                        'images' => $imagesArray,
-                    ];
-                }
+                $tricksArray[] = ['id' => $trick->getId(),
+                    'name' => $trick->getName(),
+                    'description' => $trick->getDescription(),
+                    'category' => $trick->getCategory(),
+                    'images' => ['0' => [
+                        'webPath' => $webPath[0]['webPath']
+                    ]],
+                ];
             }
 
         }

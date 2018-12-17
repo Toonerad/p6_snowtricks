@@ -17,7 +17,6 @@
     <!-- Boomerang CSS (including Bootstrap) -->
     {% block stylesheets %}{% endblock %}
     <link type="text/css" href="{{ asset('css/theme.css') }}" rel="stylesheet">
-
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-transparent  {% block navbar %}navbar-dark{% endblock %} bg-dark py-4">
@@ -50,8 +49,8 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="" id="navbar_main_dropdown_1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mon compte  </a>
                         <div class="dropdown-menu" aria-labelledby="navbar_1_dropdown_1">
-                            <span class="dropdown-item">Pseudo: {{ app.user.username }}</span>
                             <a class="dropdown-item" href="{{ path('tricks_add') }}">Ajouter une figure</a>
+                            <a class="dropdown-item" href="{{ path('users', {'username': app.user.username }) }}">Mon profil: {{ app.user.username }}</a>
                             <a class="dropdown-item" data-toggle="modal" data-target="#modal_5" href="">Déconnexion</a>
 
                         </div>
@@ -65,6 +64,7 @@
     </div>
 
 </nav>
+
 
 <main class="main">
     {% block body %}{% endblock %}
@@ -89,19 +89,19 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <a href="{{ path('security_logout') }}" class="btn btn-sm bg-light d-none d-lg-inline-flex">Déconnexion</a>
+                <a href="{{ path('security_logout') }}" class="btn btn-sm bg-light d-lg-inline-flex">Déconnexion</a>
             </div>
         </div>
     </div>
 </div>
-
+</body>
 {% block footer %}
 
 <footer class="pt-5 pb-3 footer footer-dark bg-tertiary">
     <div class="container">
         <div class="d-flex align-items-center">
         <span class="">
-          © 2018 Snowtricks. Tous droits réservé.
+          © 2018 Snowtricks. Tous droits réservé. <br> Dev by <a href="https://lucasbassand.com/">Lucas</a>.
         </span>
             <ul class="nav ml-lg-auto">
                 <li class="nav-item">
@@ -122,6 +122,27 @@
 <script src="{{ asset('vendor/popper/popper.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap/bootstrap.min.js') }}"></script>
 
+{% for message in app.flashes('success') %}
+    <script type="text/javascript">
+        $( document ).ready(function() {
+            $('#modal_alert').modal('toggle')
+        });
+    </script>
+    <div class="modal-fluid modal modal-info fade" id="modal_alert" tabindex="-1" role="dialog" aria-labelledby="modal_alert" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title" id="modal_title_6">{{ message }}</h6>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fermer">
+                        <span aria-hidden="true"><i class="fas fa-times-circle"></i></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+
+
 <!-- FontAwesome 5 -->
 <script src="{{ asset('vendor/fontawesome/js/fontawesome-all.min.js') }}"></script>
 
@@ -130,5 +151,4 @@
 
 {% block javascripts %}
 {% endblock %}
-</body>
 </html>

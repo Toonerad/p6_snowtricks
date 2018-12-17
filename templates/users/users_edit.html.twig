@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page d'édition de votre profil {{ parent() }}{% endblock %}
+
+{% block navbar %}navbar-light{% endblock %}
+
+{% block body %}
+
+<section class="slice slice-xl">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+                <div class="text-center pt-lg-md">
+                    <h2 class="heading h1 mb-4">
+                        Editer votre profil
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <section class="slice slice-lg">
+        <div class="container">
+            <div class="col-md-auto">
+
+                {{ form_start(formUserEdit) }}
+
+                {{ form_row(formUserEdit.username, {'label': 'Pseudo', 'attr': {'placeholder': 'Votre pseudo'} }) }}
+                {{ form_row(formUserEdit.description, {'label': 'Description' ,'attr': {'placeholder': 'Description de votre profil.. '}})}}
+
+
+            </div>
+            <div class="container">
+                <div class="col-lg-5 ml-lg-auto" style="margin-top: 5em">
+                    <h3 class="heading heading-3 strong-300">
+                        Avant d'éditer votre profil
+                    </h3>
+                    <p class="">
+                        - Vérifier vos informations<br>
+                        - Le lien de votre profil changera si le pseudo est modifié
+                    </p>
+                    <button type="submit" class="btn btn-block btn-lg bg-gradient-cyan mt-4">Modifier</button>
+                    {{ form_end(formUserEdit) }}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% endblock %}

@@ -66,6 +66,12 @@ class User implements UserInterface
      */
     private $isActivated;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $description;
+
+
     private $roles = [];
 
     public function getId(): ?int
@@ -172,6 +178,24 @@ class User implements UserInterface
     {
         $this->isActivated = $isActivated;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param mixed $description
+     */
+    public function setDescription($description): void
+    {
+        $this->description = $description;
+    }
+
+
 
     public function getRoles(): array
     {
