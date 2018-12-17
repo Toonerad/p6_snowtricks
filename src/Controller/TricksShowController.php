@@ -27,16 +27,14 @@ class TricksShowController extends AbstractController
 
 
     /**
-     * @Route("/tricks/{id}", name="tricks_show")
+     * @Route("/tricks/{slug}", name="tricks_show")
      *
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function show(Request $request)
     {
-        $trick = $this->trickRepository->find($request->attributes->get('id'));
-
-
+        $trick = $this->trickRepository->findOneBy(['slug' => $request->attributes->get('slug') ]);
 
         //A changer
         return $this->render('tricks/tricks_show.html.twig', [

@@ -61,7 +61,7 @@ class TricksEditController
 
 
     /**
-     * @Route(path="/tricks/{id}/edit", name="tricks_edit")
+     * @Route(path="/tricks/{slug}/edit", name="tricks_edit")
      * @IsGranted("ROLE_USER")
      *
      * @param Request $request
@@ -73,13 +73,13 @@ class TricksEditController
      */
     public function edit(Request $request, TrickEditFormHandler $formHandler )
     {
-        $trick = $this->trickRepository->find($request->attributes->get('id'));
+        $trick = $this->trickRepository->findOneBy(['slug' => $request->attributes->get('slug') ]);
 
         $form = $this->formFactory->create(TrickEditType::class, $trick)->handleRequest($request);
 
         if($formHandler->handle($form)) {
             $request->getSession()->getFlashBag()->add('success', 'La figure à été correctement modifié');
-            return new RedirectResponse($this->urlGenerator->generate('tricks_show', ['id' => $trick->getId()]));
+            return new RedirectResponse($this->urlGenerator->generate('tricks_show', ['slug' => $trick->getSlug()]));
         }
 
         return new Response($this->twig->render('tricks/tricks_edit.html.twig', [

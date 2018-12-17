@@ -57,7 +57,7 @@ class TricksDeleteController
 
 
     /**
-     * @Route(path="/tricks/delete/{id}", name="delete_tricks")
+     * @Route(path="/tricks/delete/{slug}", name="delete_tricks")
      *
      *
      * @param Request $request
@@ -69,7 +69,7 @@ class TricksDeleteController
      */
     public function deleteTrick(Request $request)
     {
-        $trick = $this->trickRepository->find($request->attributes->get('id'));
+        $trick = $this->trickRepository->findOneBy(['slug' => $request->attributes->get('slug') ]);
 
         $form = $this->formFactory->create();
 

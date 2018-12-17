@@ -30,6 +30,11 @@ class Trick
     private $name;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $slug;
+
+    /**
      * @ORM\Column(type="text")
      */
     private $description;
@@ -136,5 +141,23 @@ class Trick
         $picture->setTrick(null);
         $this->images->removeElement($picture);
     }
+
+    /**
+     * @return mixed
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param mixed $slug
+     */
+    public function setSlug($slug): void
+    {
+        $this->slug = $slug;
+    }
+
+
 
 }

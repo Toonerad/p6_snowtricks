@@ -22,8 +22,8 @@
             </div>
         <div class="row justify-content-center">
             {# On met l'id de l'annonce dans la route de l'action du formulaire #}
-            <form action="{{ path('delete_tricks', {'id': trick.id}) }}" method="post">
-                <a href="{{ path('tricks_show', {'id': trick.id}) }}" class="btn btn-default">
+            <form action="{{ path('delete_tricks', {'slug': trick.slug}) }}" method="post">
+                <a href="{{ path('tricks_show', {'slug': trick.slug}) }}" class="btn btn-default">
                     <i class="glyphicon glyphicon-chevron-left"></i>
                     Voir la figure
                 </a>

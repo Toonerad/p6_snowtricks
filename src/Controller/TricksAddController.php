@@ -66,7 +66,7 @@ class TricksAddController
 
         if($formHandler->handle($form)) {
             $request->getSession()->getFlashBag()->add('success', 'Votre figure est correctement ajoutée');
-            return new RedirectResponse($this->urlGenerator->generate('tricks_show', ['id' => $trick->getId()]));
+            return new RedirectResponse($this->urlGenerator->generate('tricks_show', ['slug' => $trick->getSlug()]));
         }
 
         return new Response($this->twig->render('tricks/tricks_add.html.twig', [

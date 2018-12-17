@@ -58,6 +58,7 @@ class TricksAjaxController
                     'name' => $trick->getName(),
                     'description' => $trick->getDescription(),
                     'category' => $trick->getCategory(),
+                    'slug' => $trick->getSlug(),
                     'images' => ['0' => [
                         'webPath' => "/img/default.png"
                     ]],
@@ -67,6 +68,7 @@ class TricksAjaxController
                     'name' => $trick->getName(),
                     'description' => $trick->getDescription(),
                     'category' => $trick->getCategory(),
+                    'slug' => $trick->getSlug(),
                     'images' => ['0' => [
                         'webPath' => $webPath[0]['webPath']
                     ]],
