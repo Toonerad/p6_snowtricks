@@ -11,7 +11,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Entity(repositoryClass="App\Repository\TrickRepository")
  * @UniqueEntity(
  *     fields={"name"},
- *     errorPath="name",
  *     message="La figure existe déjà"
  * )
  */

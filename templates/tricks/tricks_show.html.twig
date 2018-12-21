@@ -4,29 +4,40 @@
 
 {% block navbar %}navbar-dark{% endblock %}
 
-{% block stylesheets %}
-
-    <style>
-        body {
-            background-image: url({{ asset('img/trick_background.jpg') }});
-        }
-
-        #test {
-            background-color: white;
-            border: 0 solid white;
-            border-radius: 10px;
-            padding: 10px;
-            box-shadow: 5px 10px 18px #3f3f3f;
-            margin-top: 5em;
-            position: relative;
-        }
-
-    </style>
-
-{% endblock %}
-
 {% block body %}
-    <section class="slice slice-xl spotlight parallax bg-cover bg-size--cover" data-spotlight="fullscreen" >
+
+    <section class="spotlight parallax bg-cover bg-size--cover" data-spotlight="fullscreen" style="background-image: url('{{ asset('img/trick_background.jpg') }}')">
+        <span class="mask bg-tertiary alpha-7"></span>
+        <div class="spotlight-holder py-lg pt-lg-xl" style="height: 758px;">
+            <div class="container d-flex align-items-center no-padding">
+                <div class="col">
+                    <div class="row cols-xs-space align-items-center text-center text-md-left justify-content-center">
+                        <div class="col-lg-7">
+                            <div class="text-center mt-5">
+                                <h1 class="heading h1 text-white">
+                                    {{ trick.name }}
+                                </h1>
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slice-lg">
+        <div class="container">
+            <div class="row align-items-center cols-xs-space cols-sm-space cols-md-space">
+                <p class="lead lh-180">
+                    <span class="badge badge-lg badge-pill badge-tertiary">Catégorie: {{ trick.category }}</span>
+                    <span class="badge badge-lg badge-pill badge-secondary"><i>Modifié le {{ trick.createdAt|date("d/m/Y à H:i") }}</i></span>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    {#<section class="slice slice-xl spotlight parallax bg-cover bg-size--cover" data-spotlight="fullscreen" >
         <span class="mask bg-tertiary alpha-7"></span>
         <div class="container" id="test">
             {% if app.user %}
@@ -52,22 +63,29 @@
                 </div>
             </div>
 
+
+
+
             <h2 style="margin-left: 20px ">Description:</h2>
             <div class="font-weight-600 text-dark" style="margin-left: 10px; margin-right: 10px">
                 {% autoescape %}
                {{ trick.description|raw }}
                 {% endautoescape %}
             </div>
+
+
             
-            {# for image in trick.images %}
+            {%  for image in trick.images %}
                 <img src="{{ asset(image.webPath) }}" alt="{{ image.alt }}">
             {% endfor %}
             {% if trick.images is empty %}
             <h3>Pas d'image ici !</h3>
-            {% endif #}
+            {% endif %}
 
 
         </div>
-    </section>
+    </section>#}
+
+
 
 {% endblock %}

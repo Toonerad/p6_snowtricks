@@ -86,7 +86,7 @@ class ActivationController
         if($formHandler->handle($form)) {
             $user->setIsActivated(1);
             $this->userRepo->flush();
-            $this->sendMailer->send("Vérification de votre compte", "contact@lucasbassand.com", $user->getEmail(), "emails/success.html.twig");
+            $this->sendMailer->send("Vérification de votre compte", "contact@lucasbassand.com", $user->getEmail(), "emails/success.html.twig", ['user' => $user ]);
 
             return new RedirectResponse($this->urlGenerator->generate('success', ['token' => $token]));
         }
