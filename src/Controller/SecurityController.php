@@ -65,7 +65,7 @@ class SecurityController extends AbstractController
             $manager->persist($user);
             $manager->flush();
 
-            $this->sendMailer->send('Activation de votre compte', 'no-reply@lucasbassand.com', $user->getEmail(), 'emails/verif.html.twig', ['user' => $user,]);
+            $this->sendMailer->send('Activation de votre compte', ["no-reply@lucasbassand.com" => "SnowTricks"], $user->getEmail(), 'emails/verif.html.twig', ['user' => $user,]);
 
 
             return $this->redirectToRoute("security_login");

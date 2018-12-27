@@ -54,12 +54,18 @@ class Trick
     private $images;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Video", cascade={"persist"}, mappedBy="trick", orphanRemoval=true)
+     */
+    private $videos;
+
+    /**
      * Trick constructor.
      */
     public function __construct()
     {
         $this->createdAt = new \DateTime();
         $this->images = new ArrayCollection();
+        $this->videos = new ArrayCollection();
     }
 
 
@@ -155,6 +161,37 @@ class Trick
     public function setSlug($slug): void
     {
         $this->slug = $slug;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getVideos()
+    {
+        return $this->videos;
+    }
+
+    public function addVideo(Video $video)
+    {
+        if (!$this->videos->contains($video)) {
+            $this->videos[] = $video;
+            $video->setTrick($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVideo(Video $video)
+    {
+        if ($this->videos->contains($video)) {
+            $this->videos->removeElement($video);
+            // set the owning side to null (unless already changed)
+            if ($video->getTrick() === $this) {
+                $video->setTrick(null);
+            }
+        }
+
+        return $this;
     }
 
 
