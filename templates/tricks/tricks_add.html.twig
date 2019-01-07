@@ -28,6 +28,20 @@
     </div>
 {% endmacro %}
 
+{% import _self as formVMacros %}
+{% macro printVideoRow(videoForm) %}
+    <div class="js-video-item" style="margin: 20px;">
+        <a href="#" class="js-remove-video" style="margin-top: 5px">
+            <span class="fa fa-trash"></span> Supprimer
+        </a>
+        {% form_theme videoForm 'form_div_layout.html.twig' %}
+        {{ form_errors(videoForm) }}
+
+        {{ form_row(videoForm.url) }}
+    </div>
+{% endmacro %}
+
+
 {% block body %}
 
     <section class="slice slice-xl">
@@ -77,6 +91,27 @@
 
                     </div>
 
+                    <div class="row justify-content-center js-video-wrapper"
+                         data-videoprototype="{{ formVMacros.printVideoRow(formTricksAdd.videos.vars.prototype)|e('html_attr') }}"
+                         data-index="{{ formTricksAdd.videos|length }}">
+                        {% if formTricksAdd.videos|length == 0 %}
+                            {# prevents weird label from showing up #}
+                            {{ form_widget(formTricksAdd.videos) }}
+                        {% else %}
+                            {% for video in formTricksAdd.videos %}
+                                {{ formVMacros.printVideoRow(video) }}
+                            {% endfor %}
+                        {% endif %}
+
+
+                        <a href="" class="btn btn-info js-video-add" style="max-height: 45px; margin-top: 30px ">
+                            <span class="fa fa-plus-circle"></span>
+                            Ajouter une video
+                        </a>
+
+                    </div>
+
+
                 </div>
         </div>
         <div class="container">
@@ -125,6 +160,28 @@
                     // Display the form in the page before the "new" link
                     $(this).before(newForm);
                 });
+
+                var $wrapperV = $('.js-video-wrapper');
+                $wrapperV.on('click', '.js-remove-video', function(e) {
+                    e.preventDefault();
+                    $(this).closest('.js-video-item')
+                        .fadeOut()
+                        .remove();
+                });
+                $wrapperV.on('click', '.js-video-add', function(e) {
+                    e.preventDefault();
+                    var videoprototype = $wrapperV.data('videoprototype');
+                    // get the new index
+                    var index = $wrapperV.data('index');
+                    // Replace '__name__' in the prototype's HTML to
+                    // instead be a number based on how many items we have
+                    var newForm = videoprototype.replace(/__name__/g, index);
+                    // increase the index with one for the next item
+                    $wrapperV.data('index', index + 1);
+                    // Display the form in the page before the "new" link
+                    $(this).before(newForm);
+                });
+
             });
         })(jQuery);
     </script>

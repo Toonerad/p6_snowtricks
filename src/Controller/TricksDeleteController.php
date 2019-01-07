@@ -10,6 +10,7 @@ namespace App\Controller;
 
 
 use App\Repository\TrickRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -58,7 +59,7 @@ class TricksDeleteController
 
     /**
      * @Route(path="/tricks/delete/{slug}", name="delete_tricks")
-     *
+     * @IsGranted("ROLE_USER")
      *
      * @param Request $request
      * @return RedirectResponse|Response
