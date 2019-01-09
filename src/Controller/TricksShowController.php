@@ -2,11 +2,18 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
 use App\Entity\Trick;
+use App\Form\AddCommentType;
+use App\Handler\Form\AddCommentFormHandler;
 use App\Repository\TrickRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class TricksShowController extends AbstractController
 {
@@ -38,7 +45,7 @@ class TricksShowController extends AbstractController
 
         //A changer
         return $this->render('tricks/tricks_show.html.twig', [
-            'trick' => $trick
+            'trick' => $trick,
         ]);
     }
 }
