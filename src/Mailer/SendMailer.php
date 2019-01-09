@@ -40,18 +40,20 @@ class SendMailer
      * @param $fromEmail
      * @param $toEmail
      * @param $template
+     * @param $data
      * @return int
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
+     *
      */
-    public function send($subject, $fromEmail, $toEmail, $template)
+    public function send($subject, $fromEmail, $toEmail, $template, $data)
     {
         $message = (new \Swift_Message($subject))
             ->setFrom($fromEmail)
             ->setTo($toEmail)
             ->setBody(
-                $this->twig->render($template),
+                $this->twig->render($template, $data),
                 'text/html'
             )
 

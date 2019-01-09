@@ -7,7 +7,7 @@
         .card-image{
             position: relative;
             width: 255px;
-            height: 200px;
+            height: 190px;
             overflow: hidden;
         }
         .img-tricks{
@@ -48,7 +48,7 @@
             <div class="mb-md text-center">
                 <h3 class="heading h3">Nouvelles figures</h3>
                 <div class="fluid-paragraph text-center mt-4">
-                    <p class="lead lh-180">Dernières figures ajoutées sur le site par des utilisateurs.{% if not app.user %} Merci de vous inscrire/connecter afin de les éditer ou suprimmer.{% endif %}</p>
+                    <p class="lead lh-180">Dernières figures ajoutées sur le site par des utilisateurs.{% if not app.user %} Merci de vous inscrire/connecter afin de les éditer ou suprimmer.{% else %} <a href="{{ path('tricks_add') }}" >Ajouter une figure</a>{% endif %}</p>
                 </div>
             </div>
 
@@ -59,22 +59,8 @@
                     <button id="more" type="button" class="btn btn-block btn-outline-tertiary">Voir plus <i id="load" class="fas fa-spinner fa-spin"></i></button>
 
                 </div>
-            </div>
 
-
-            {% if app.user %}
-            <div class="px-4">
-                <div class="row justify-content-center cols-xs-space cols-sm-space cols-md-space">
-                    <div class="col-lg-7">
-                        <div class="text-center">
-                            <div class="btn-container mt-5">
-                                   <a href="{{ path('tricks_add') }}" class="btn btn-link">Ajouter une figure</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
-            {% endif %}
 
         </div>
     </section>
@@ -183,8 +169,9 @@
                     },
                     success: function (result) {
                         total = result.length;
-                        if (total < limit ) {
-                            $("#more").prop('disabled',true);
+                        if (total < limit) {
+                            //$("#more").prop('disabled',true);
+                            $("#more").hide();
                         }
 
                         for(var i=0; i < result.length; i++)
@@ -192,7 +179,7 @@
                             var trick = result[i];
                             var slug = result[i]['slug'];
                             var images = result[i]['images']['0']['webPath'];
-                            console.log(trick);
+                            console.log(images);
                             var html =
                                 "<div class=\"col-lg-3\" style=\"margin-bottom: 30px\">\n" +
                                 "                    <div class=\"card\">\n" +

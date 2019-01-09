@@ -4,10 +4,12 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationType;
+use App\Mailer\SendMailer;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
@@ -19,12 +21,19 @@ class SecurityController extends AbstractController
     private $authenError;
 
     /**
+     * @var SendMailer
+     */
+    private $sendMailer;
+
+    /**
      * SecurityController constructor.
      * @param AuthenticationUtils $authenError
+     * @param SendMailer $sendMailer
      */
-    public function __construct(AuthenticationUtils $authenError)
+    public function __construct(AuthenticationUtils $authenError, SendMailer $sendMailer)
     {
         $this->authenError = $authenError;
+        $this->sendMailer = $sendMailer;
     }
 
 
@@ -55,6 +64,8 @@ class SecurityController extends AbstractController
             $user->setCode($code);
             $manager->persist($user);
             $manager->flush();
+
+            $this->sendMailer->send('Activation de votre compte', ["no-reply@lucasbassand.com" => "SnowTricks"], $user->getEmail(), 'emails/verif.html.twig', ['user' => $user,]);
 
 
             return $this->redirectToRoute("security_login");
