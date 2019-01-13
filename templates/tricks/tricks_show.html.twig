@@ -129,6 +129,14 @@
             </div>
             <br>
             <h2 style="margin-top: 50px; ">Commentaires:</h2>
+            {% if app.user %}
+                {{ form_start(formCommentAdd) }}
+                {{ form_row(formCommentAdd.author)}}
+                {{ form_row(formCommentAdd.content, {'label': 'Laisser un commentaire'} )}}
+                {{ form_row(formCommentAdd.trick_id)}}
+                <button type="submit" class="btn btn-block btn-lg bg-gradient-cyan mt-4">Valider</button>
+                {{ form_end(formCommentAdd) }}
+            {% endif %}
 
 
 
