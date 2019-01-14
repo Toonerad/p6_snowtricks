@@ -5,7 +5,8 @@
 {% block navbar %}navbar-light{% endblock %}
 
 {% block stylesheets %}
-<style>
+    <link type="text/css" href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <style>
     /*jssor slider loading skin spin css*/
     .jssorl-009-spin img {
         animation-name: jssorl-009-spin;
@@ -131,6 +132,42 @@
             <h2 style="margin-top: 50px; ">Commentaires:</h2>
 
 
+            {% if comments is not empty %}
+            <div class="comments-container">
+                <ul id="comments-list" class="comments-list">
+                        {% for comment in comments %}
+                            <li>
+                                <div class="comment-main-level">
+                                    <!-- Avatar -->
+                                    <div class="comment-avatar"><span class="avatar avatar-lg bg-gradient-blue mr-3">{{ comment.author|slice(0,1) }}</span></div>
+                                    <!-- Contenedor del Comentario -->
+                                    <div class="comment-box">
+                                        <div class="comment-head">
+                                            <h6 class="comment-name by-author"><a href="{{ path('users', {'username': comment.author}) }}">{{ comment.author }}</a></h6>
+                                        </div>
+                                        <div class="comment-content">
+                                            {{ comment.content }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        {% endfor %}
+                </ul>
+            </div>
+            {% else %}
+                <p>Cet article n'a pas encore de commentaire</p>
+            {% endif %}
+
+            <br>
+
+            {% if app.user %}
+                {{ form_start(formCommentAdd) }}
+                {{ form_row(formCommentAdd.author)}}
+                {{ form_row(formCommentAdd.content, {'label': 'Laisser un commentaire'} )}}
+                {{ form_row(formCommentAdd.trick_id)}}
+                <button type="submit" class="btn btn-block btn-lg bg-gradient-cyan mt-4">Valider</button>
+                {{ form_end(formCommentAdd) }}
+            {% endif %}
 
 
         </div>

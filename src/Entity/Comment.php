@@ -17,8 +17,7 @@ class Comment
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="comments")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $author;
 
@@ -28,22 +27,21 @@ class Comment
     private $content;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Trick", inversedBy="comments")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
-    private $trick;
+    private $trick_id;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getAuthor(): ?User
+    public function getAuthor(): ?string
     {
         return $this->author;
     }
 
-    public function setAuthor(?User $author): self
+    public function setAuthor(string $author): self
     {
         $this->author = $author;
 
@@ -62,15 +60,23 @@ class Comment
         return $this;
     }
 
-    public function getTrick(): ?Trick
+    /**
+     * @return mixed
+     */
+    public function getTrickId()
     {
-        return $this->trick;
+        return $this->trick_id;
     }
 
-    public function setTrick(?Trick $trick): self
+    /**
+     * @param mixed $trick_id
+     */
+    public function setTrickId($trick_id): void
     {
-        $this->trick = $trick;
-
-        return $this;
+        $this->trick_id = $trick_id;
     }
+
+
+
+
 }

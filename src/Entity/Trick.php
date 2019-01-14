@@ -63,6 +63,7 @@ class Trick
      */
     private $comments;
 
+
     /**
      * Trick constructor.
      */
@@ -230,6 +231,7 @@ class Trick
 
         return $this;
     }
+
 
 
 
