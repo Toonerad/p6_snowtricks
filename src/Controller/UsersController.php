@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\CommentRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,6 +18,11 @@ class UsersController extends AbstractController
     private $userRepository;
 
     /**
+     * @var CommentRepository
+     */
+    private $commentRepository;
+
+    /**
      * @var Environment
      */
     private $twig;
@@ -24,11 +30,13 @@ class UsersController extends AbstractController
     /**
      * UsersController constructor.
      * @param UserRepository $userRepository
+     * @param CommentRepository $commentRepository
      * @param Environment $twig
      */
-    public function __construct(UserRepository $userRepository, Environment $twig)
+    public function __construct(UserRepository $userRepository, CommentRepository $commentRepository, Environment $twig)
     {
         $this->userRepository = $userRepository;
+        $this->commentRepository = $commentRepository;
         $this->twig = $twig;
     }
 
@@ -44,10 +52,14 @@ class UsersController extends AbstractController
      */
     public function index(Request $request)
     {
-        $userRoute = $this->userRepository->findOneBy(['username' => $request->attributes->get('username')]);
+        $username = $request->attributes->get('username');
+        $userRoute = $this->userRepository->findOneBy(['username' => $username]);
+
+        $lastComment = $this->commentRepository->findOneBy(['author' => $username], ['id' => 'DESC']);
 
         return new Response($this->twig->render('users/index.html.twig', [
             'user' => $userRoute,
+            'lastComment' => $lastComment,
         ]));
 
     }
